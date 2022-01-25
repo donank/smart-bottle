@@ -13,3 +13,5 @@ A smart device (bottle) that helps the user decide whether the water in the bott
 | Turbidity  | NTU | 0-5  |
 | pH  | PH  | 6.5-8.5 |
 
+## References
+[1] World Health Organization Guidelines for drinking-water quality, fourth edition, 2011
