@@ -4,3 +4,12 @@ A smart device (bottle) that helps the user decide whether the water in the bott
 
 ## Schematic Diagram
 ![Schematic](./schematic.svg)
+
+## Threshold Values 
+
+| Parameter  | Units | Expected Range |
+| ------------- | ------------- | ------------- |
+| Conductivity  | µs/cm  | 500-1000  |
+| Turbidity  | NTU | 0-5  |
+| pH  | PH  | 6.5-8.5 |
+
