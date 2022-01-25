@@ -19,4 +19,5 @@ A smart device (bottle) that helps the user decide whether the water in the bott
 
 ## References
 [1] World Health Organization Guidelines for drinking-water quality, fourth edition, 2011
+
 [2] Y.J. Yang, R.C Haught and J.A Goodrich, Real-time contaminant detection and classification in a drinking water pipe using conventional water quality sensors: Techniques and experimental results, in Journal of Environmental Management, 2009
