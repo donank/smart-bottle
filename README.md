@@ -15,7 +15,7 @@ This device can be customised and targeted according to the needs of the end cus
   <img src="https://raw.githubusercontent.com/donank/smart-bottle/51891a3bb961518fbd0d75c031baf2d21b2ab916/schematic.svg" />
 </p>
 
-Note: Sensor units are composed of pre-filters and amplifiers to attenuate noise to deliver adequate results.
+Note: Sensor units are composed of pre-filters and amplifiers to attenuate noise and deliver adequate results.
 
 
 ## Threshold Values 
