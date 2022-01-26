@@ -25,3 +25,5 @@ A smart device (bottle) that helps the user decide whether the water in the bott
 ## Sensors to explore
 
 [1] https://phys.org/news/2016-12-world-solid-state-multi-ion-sensor-internet.html
+
+[2] https://pubs.acs.org/doi/full/10.1021/acs.analchem.7b00843
