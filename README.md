@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/donank/smart-bottle/blob/main/logo.svg" width="150" height="200"/>
+  <img src="https://github.com/donank/smart-bottle/blob/main/logo.png" width="150" height="200"/>
 </p>
 
 # Ọ̀ṣun: A Smart Water Bottle
