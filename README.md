@@ -8,7 +8,7 @@ A smart device (bottle) that helps the user decide whether the water in the bott
 
 ## Schematic Diagram
 <p align="center">
-  <img src="https://github.com/donank/smart-bottle/blob/main/schematic.svg" />
+  <img src="https://raw.githubusercontent.com/donank/smart-bottle/51891a3bb961518fbd0d75c031baf2d21b2ab916/schematic.svg" />
 </p>
 
 
