@@ -20,7 +20,7 @@ set_target_properties(circularbuffer PROPERTIES
   SOVERSION 1
   PUBLIC_HEADER "${LIBINCLUDE}")
 
-#target_link_libraries(circularbuffer)
+target_link_libraries(circularbuffer PUBLIC)
 
 install(TARGETS circularbuffer EXPORT circularbuffer-targets
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -35,11 +35,16 @@ add_library(circularbuffer_static
 set_target_properties(circularbuffer_static PROPERTIES
   PUBLIC_HEADER "${LIBINCLUDE}")
 
-target_link_libraries(circularbuffer_static)
+target_link_libraries(circularbuffer_static PUBLIC)
 
 
 install(TARGETS circularbuffer_static EXPORT circularbuffer_static-targets
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
   PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+  target_include_directories(circularbuffer PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+  set(A "Circ Buffer")
+
+
 

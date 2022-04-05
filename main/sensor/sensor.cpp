@@ -1,5 +1,9 @@
 #include "sensor.h"
 
+std::string sensor::getName(){
+    return sensorName;
+}
+
 void sensor::setData(double data){
     cb.put(data);
 }

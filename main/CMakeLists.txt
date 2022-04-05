@@ -14,3 +14,5 @@ add_executable(main main.cpp)
 target_link_libraries(main ads1115rpi_static circularbuffer_static)
 target_include_directories(main PRIVATE rpi_ads1115 circularbuffer)
 
+
+

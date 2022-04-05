@@ -8,9 +8,6 @@
 #include <assert.h>
 #include "circularbufferinstantiated.h"
 
-
-#define ISR_TIMEOUT 1000
-
 /**
  * Parent sensor class
  **/
@@ -21,8 +18,9 @@ public:
         sensorName = name;
     }
 
+    std::string getName();
     void setData(double data);
-    void getData();
+    double getData();
     virtual void calcThreshold();
 
 private:

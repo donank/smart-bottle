@@ -1,10 +1,11 @@
 cmake_minimum_required(VERSION 3.1.0)
 
 set(CMAKE_CXX_STANDARD 14)
+set(add $(CMAKE_CURRENT_SOURCE_DIR)$/../circularbuffer/)
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../circularbuffer ${CMAKE_CURRENT_BINARY_DIR}/../circularbuffer)
 
-project(Sensor VERSION 1.0.0 LANGUAGES CXX)
+project(sensor VERSION 1.0.0 LANGUAGES CXX)
 include(GNUInstallDirs)
 
 add_compile_options(-Wall -Wconversion -Wextra -pedantic)
@@ -23,7 +24,7 @@ set_target_properties(sensor PROPERTIES
 
 target_link_libraries(sensor circularbuffer_static)
 
-install(TARGETS sensor EXPORT ads1115rpi-targets
+install(TARGETS sensor EXPORT sensor-targets
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
   PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
@@ -38,9 +39,12 @@ add_library(sensor_static
 set_target_properties(sensor_static PROPERTIES
   PUBLIC_HEADER "${LIBINCLUDE}")
 
-target_link_libraries(sensor_static circularbuffer)
+target_link_libraries(sensor_static circularbuffer_static)
 
-install(TARGETS sensor_static EXPORT ads1115rpi_static-targets
+install(TARGETS sensor_static EXPORT sensor_static-targets
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
   PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+  include(CMakePrintHelpers)
+  cmake_print_variables(add)
