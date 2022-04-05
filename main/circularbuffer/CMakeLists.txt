@@ -8,7 +8,7 @@ endif()
 
 project(circularbuffer VERSION 1.0.0 LANGUAGES CXX)
 
-set(LIBSRC circularbuffer.cpp)
+set(LIBSRC circularbufferinstantiated.cpp)
 set(LIBINCLUDE circularbuffer.h)
 
 add_library(circularbuffer

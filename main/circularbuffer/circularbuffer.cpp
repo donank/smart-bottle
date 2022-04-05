@@ -1,20 +1,20 @@
 #include "circularbuffer.h"
     
 template<class T>
-bool Circularbuffer<T>::empty() const {
+bool circularbuffer<T>::empty() const {
     //if head and tail are equal, we are empty
 	return (!full_ && (head_ == tail_));
 }
 
 template<class T>
-bool Circularbuffer<T>::full() const
+bool circularbuffer<T>::full() const
 {
 	//If tail is ahead the head by 1, we are full
 	return full_;
 }
 
 template<class T>
-void Circularbuffer<T>::reset()
+void circularbuffer<T>::reset()
 {
 	std::lock_guard<std::mutex> lock(mutex_);
 	head_ = tail_;
@@ -22,13 +22,13 @@ void Circularbuffer<T>::reset()
 }
 
 template<class T>
-size_t Circularbuffer<T>::capacity() const
+size_t circularbuffer<T>::capacity() const
 {
 	return max_size_;
 }
 
 template<class T>
-size_t Circularbuffer<T>::size() const
+size_t circularbuffer<T>::size() const
 {
 	size_t size = max_size_;
 
@@ -48,7 +48,7 @@ size_t Circularbuffer<T>::size() const
 }
 
 template<class T>
-void Circularbuffer<T>::put(T item)
+void circularbuffer<T>::put(T item)
 {
 	std::lock_guard<std::mutex> lock(mutex_);
 
@@ -65,7 +65,7 @@ void Circularbuffer<T>::put(T item)
 }
 
 template<class T>
-T Circularbuffer<T>::get()
+T circularbuffer<T>::get()
 {
 	std::lock_guard<std::mutex> lock(mutex_);
 

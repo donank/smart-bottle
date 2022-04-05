@@ -1,1 +1,0 @@
-add_library(ads1115rpi ads1115rpi.cpp)

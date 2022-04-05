@@ -6,9 +6,9 @@
 #include <memory>
 
 template <class T>
-class Circularbuffer {
+class circularbuffer {
 public:
-	explicit Circularbuffer(size_t size) :
+	explicit circularbuffer(size_t size) :
 		buf_(std::unique_ptr<T[]>(new T[size])),
 		max_size_(size)
 	{
