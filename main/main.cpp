@@ -1,6 +1,5 @@
 #include <iostream>
 #include "ads1115rpi.h"
-//#include "circularbuffer/circularbuffer.h"
 #include "circularbufferinstantiated.h"
 #include <chrono>
 
@@ -17,19 +16,23 @@ class ADS1115Printer : public ADS1115rpi {
 		printf("start time: \n: %d", start_time);
 		int flag = 1;
 		while(flag){
-			printf("\n\tcb1 size!\n");
-			printf("%zu",cb1.size());
+			printf("\n\tcb1 size: %zu", cb1.size());
 
 			std::time_t curr_time = system_clock::to_time_t (system_clock::now());
 			printf("\ntime delay: %d", curr_time - start_time);
 
-			if(curr_time - start_time == 10){
+			if(curr_time - start_time == 4){
 				flag = 0;
-				printf("cb4 size!\n");
-				printf("%zu",cb4.size());
+				printf("\ncb1-1: %e", cb1.get());
+				printf("\ncb1-2: %e", cb1.get());
+				printf("\ncb1-3: %e", cb1.get());
+				printf("\ncb1-4: %e", cb1.get());
+				printf("\ncb1 size: %zu", cb1.size());
+				printf("------------------------- \n");
 				stop();
 			}
 			for(int i=0; i < 4; i++){
+				//setChannel(ADS1115settings::Input::AIN3);
 				setChannel(getChannel(i));
 				printf("\nChannel: %d",i+1);
 				switch(i){
@@ -48,6 +51,8 @@ class ADS1115Printer : public ADS1115rpi {
 				}
 			}
 		}
+
+		
 	}
 };
 
