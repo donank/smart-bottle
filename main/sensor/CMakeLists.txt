@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.1.0)
 
 set(CMAKE_CXX_STANDARD 14)
-set(add $(CMAKE_CURRENT_SOURCE_DIR)$/../circularbuffer/)
+set(add "${CMAKE_CURRENT_BINARY_DIR}/../circularbuffer/")
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../circularbuffer ${CMAKE_CURRENT_BINARY_DIR}/../circularbuffer)
+add_subdirectory("../circularbuffer" "${CMAKE_CURRENT_BINARY_DIR}/circularbuffer")
 
 project(sensor VERSION 1.0.0 LANGUAGES CXX)
 include(GNUInstallDirs)

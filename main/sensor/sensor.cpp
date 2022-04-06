@@ -5,10 +5,10 @@ std::string sensor::getName(){
 }
 
 void sensor::setData(double data){
-    cb.put(data);
+    cb_.put(data);
 }
 
 double sensor::getData(){
-    return cb.get(); //returns last inserted value from buffer
+    return cb_.get(); //returns last inserted value from buffer
 }
 

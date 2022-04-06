@@ -6,7 +6,7 @@
  *
  */
 #include <assert.h>
-#include "circularbufferinstantiated.h"
+#include "circularbuffer.h"
 
 /**
  * Parent sensor class
@@ -17,15 +17,15 @@ public:
     sensor(const std::string& name){
         sensorName = name;
     }
-
+    
     std::string getName();
     void setData(double data);
     double getData();
-    virtual void calcThreshold();
+    virtual void calcThreshold() = 0;
 
 private:
    std::string sensorName;
-   circularbufferinstantiated cb{10};
+   circularbuffer<double> cb_{10};
 };
 
 
