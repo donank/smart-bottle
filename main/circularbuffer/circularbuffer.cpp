@@ -82,3 +82,4 @@ T circularbuffer<T>::get()
 	return val;
 }
 
+template class circularbuffer<double>;

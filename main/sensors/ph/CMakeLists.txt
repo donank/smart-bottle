@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.1.0)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../sensor ${CMAKE_CURRENT_BINARY_DIR}/../../sensor)
+add_subdirectory("../../sensor" "${CMAKE_CURRENT_BINARY_DIR}/sensor")
+include_directories(../../sensor)
 
 project(ph VERSION 1.0.0 LANGUAGES CXX)
 include(GNUInstallDirs)
@@ -38,7 +39,7 @@ add_library(ph_static
 set_target_properties(ph_static PROPERTIES
   PUBLIC_HEADER "${LIBINCLUDE}")
 
-target_link_libraries(ph_static sensor)
+target_link_libraries(ph_static sensor_static)
 
 install(TARGETS ph_static EXPORT ph_static-targets
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}

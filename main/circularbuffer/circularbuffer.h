@@ -31,5 +31,6 @@ private:
 	const size_t max_size_;
 	bool full_ = 0;
 };
+//typedef circularbuffer<double> cb;
 
 #endif

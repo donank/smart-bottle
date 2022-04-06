@@ -14,14 +14,13 @@
 class turbidity : public sensor {
 
 public:
-    turbidity(){
+    turbidity(): sensor("turbidity"){
 
     }
-
-    virtual void calcThreshold();
-
+    
+    void calcThreshold();
 private:
-   sensor turbidity_{"turbidity"};
+
 };
 
 

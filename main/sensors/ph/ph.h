@@ -11,17 +11,16 @@
 /**
  * pH sensor class
  **/
-class pH : public sensor {
+class ph : public sensor {
 
 public:
-    pH(){
+    public:
+    ph(): sensor("ph"){
 
     }
-
-    virtual void calcThreshold();
-
+    
+    void calcThreshold();
 private:
-   sensor pH_{"pH"};
 };
 
 

@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.1.0)
 
 set(CMAKE_CXX_STANDARD 14)
-set(add "${CMAKE_CURRENT_BINARY_DIR}/../circularbuffer/")
 
 add_subdirectory("../circularbuffer" "${CMAKE_CURRENT_BINARY_DIR}/circularbuffer")
 
@@ -46,5 +45,4 @@ install(TARGETS sensor_static EXPORT sensor_static-targets
   ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
   PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
-  include(CMakePrintHelpers)
-  cmake_print_variables(add)
+  target_include_directories(sensor PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
