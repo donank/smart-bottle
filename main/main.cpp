@@ -1,6 +1,5 @@
 #include <iostream>
 #include "ads1115rpi.h"
-#include "circularbuffer.h"
 #include <chrono>
 #include "ph.h"
 #include "turbidity.h"
@@ -11,17 +10,11 @@ class ADS1115Printer : public ADS1115rpi {
 		ph ph;
 		turbidity tb;
 
-	    circularbuffer<double> cb1(10);
-		circularbuffer<double> cb2(10);
-		circularbuffer<double> cb3(10);
-		circularbuffer<double> cb4(10);
-
 		using std::chrono::system_clock;
         std::time_t start_time = system_clock::to_time_t (system_clock::now());
 		printf("start time: \n: %d", start_time);
 		int flag = 1;
 		while(flag){
-			printf("\n\tcb1 size: %zu", cb1.size());
 
 			std::time_t curr_time = system_clock::to_time_t (system_clock::now());
 			printf("\ntime delay: %d", curr_time - start_time);
@@ -29,10 +22,6 @@ class ADS1115Printer : public ADS1115rpi {
 			if(curr_time - start_time == 4){
 				flag = 0;
 				printf("\ncb1-1: %e", ph.get());
-				printf("\ncb1-2: %e", cb1.get());
-				printf("\ncb1-3: %e", cb1.get());
-				printf("\ncb1-4: %e", cb1.get());
-				printf("\ncb1 size: %zu", ph.size());
 				printf("------------------------- \n");
 				stop();
 			}
@@ -41,18 +30,17 @@ class ADS1115Printer : public ADS1115rpi {
 				setChannel(getChannel(i));
 				printf("\nChannel: %d",i+1);
 				switch(i){
-					case 1: cb1.put(v);
-							ph.setData(v);
-					printf("\n\tcb1 put: %e", v);
+					case 1: ph.setData(v);
+					printf("\n\t ph put: %e", v);
 					break;
-					case 2: cb2.put(v);
-					printf("\n\tcb2 put: %e", v);
+					case 2: tb.setData(v);
+					printf("\n\t tb put: %e", v);
 					break;
-					case 3: cb3.put(v);
-					printf("\n\tcb3 put: %e", v);
+					case 3: ph.setData(v);
+					printf("\n\t ph put: %e", v);
 					break;
-					case 4: cb4.put(v);
-					printf("\n\tcb4 put: %e", v);
+					case 4: tb.setData(v);
+					printf("\n\t tb put: %e", v);
 					break;
 				}
 			}

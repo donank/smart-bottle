@@ -18,10 +18,10 @@ set_target_properties(circularbuffer PROPERTIES
 
 target_link_libraries(circularbuffer PUBLIC)
 
-install(TARGETS circularbuffer EXPORT circularbuffer-targets
-  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+#install(TARGETS circularbuffer EXPORT circularbuffer-targets
+#  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+#  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+#  PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
 add_library(circularbuffer_static
   STATIC
@@ -34,12 +34,12 @@ set_target_properties(circularbuffer_static PROPERTIES
 target_link_libraries(circularbuffer_static PUBLIC)
 
 
-install(TARGETS circularbuffer_static EXPORT circularbuffer_static-targets
-  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+#install(TARGETS circularbuffer_static EXPORT circularbuffer_static-targets
+#  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+#  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+ # PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
-target_include_directories(circularbuffer PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+#target_include_directories(circularbuffer PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 
 

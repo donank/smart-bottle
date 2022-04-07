@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.1.0)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_subdirectory("../circularbuffer" "${CMAKE_CURRENT_BINARY_DIR}/circularbuffer")
+add_subdirectory("../circularbuffer" "${CMAKE_CURRENT_BINARY_DIR}/../../build/circularbuffer")
 
 project(sensor VERSION 1.0.0 LANGUAGES CXX)
 include(GNUInstallDirs)
@@ -23,12 +23,10 @@ set_target_properties(sensor PROPERTIES
 
 target_link_libraries(sensor circularbuffer_static)
 
-install(TARGETS sensor EXPORT sensor-targets
-  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-
-
+#install(TARGETS sensor EXPORT sensor-targets
+#  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+#  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+#  PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
 add_library(sensor_static
   STATIC
@@ -45,4 +43,4 @@ install(TARGETS sensor_static EXPORT sensor_static-targets
   ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
   PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
-  target_include_directories(sensor PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+#target_include_directories(sensor PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

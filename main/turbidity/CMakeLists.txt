@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.1.0)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_subdirectory("../../sensor" "${CMAKE_CURRENT_BINARY_DIR}/sensor")
-include_directories(../../sensor)
+#add_subdirectory("../../sensor" "${CMAKE_CURRENT_BINARY_DIR}/../../../build/sensor")
+include_directories(../sensor)
 
 project(turbidity VERSION 1.0.0 LANGUAGES CXX)
 include(GNUInstallDirs)
@@ -24,10 +24,10 @@ set_target_properties(turbidity PROPERTIES
 
 target_link_libraries(turbidity sensor_static)
 
-install(TARGETS turbidity EXPORT turbidity-targets
-  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+#install(TARGETS turbidity EXPORT turbidity-targets
+#  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+#  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+#  PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
 
 
@@ -41,7 +41,7 @@ set_target_properties(turbidity_static PROPERTIES
 
 target_link_libraries(turbidity_static sensor_static)
 
-install(TARGETS turbidity_static EXPORT turbidity_static-targets
-  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+#install(TARGETS turbidity_static EXPORT turbidity_static-targets
+#  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+#  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+#  PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})

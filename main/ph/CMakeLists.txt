@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.1.0)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_subdirectory("../../sensor" "${CMAKE_CURRENT_BINARY_DIR}/sensor")
-include_directories(../../sensor)
+#add_subdirectory("../sensor" "../../build/sensor")
+include_directories(../sensor)
 
 project(ph VERSION 1.0.0 LANGUAGES CXX)
 include(GNUInstallDirs)
@@ -24,10 +24,10 @@ set_target_properties(ph PROPERTIES
 
 target_link_libraries(ph sensor_static)
 
-install(TARGETS ph EXPORT ph-targets
-  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+#install(TARGETS ph EXPORT ph-targets
+#  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+#  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+#  PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
 
 
@@ -41,7 +41,7 @@ set_target_properties(ph_static PROPERTIES
 
 target_link_libraries(ph_static sensor_static)
 
-install(TARGETS ph_static EXPORT ph_static-targets
-  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+#install(TARGETS ph_static EXPORT ph_static-targets
+#  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+#  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+#  PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
