@@ -4,7 +4,6 @@
 #include <csignal>
 #include <iostream>
 #include "Thread.h"
-#include "RingBuffer.h"
 #include "circularbuffer.h"
 
 using namespace std;
@@ -13,7 +12,7 @@ class ReadSensor : public Thread
 {
 public:
 
-	ReadSensor(Circularbuffer<double>* cb1, Circularbuffer<double>* cb2, Circularbuffer<double>* cb3, Circularbuffer<double>* cb4, int buffer_length)
+	ReadSensor(Circularbuffer<double>* cb1, Circularbuffer<double>* cb2, Circularbuffer<double>* cb3, Circularbuffer<double>* cb4, int buffer_size)
 	{
 		cb1d = cb1;
 		cb2d = cb2;
