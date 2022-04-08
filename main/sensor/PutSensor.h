@@ -4,7 +4,6 @@
 #include <csignal>
 #include <iostream>
 #include "Thread.h"
-#include "RingBuffer.h"
 #include "circularbuffer.h"
 
 
@@ -14,7 +13,7 @@ class PutSensor : public Thread
 {
 public:
 
-	PutSensor(Circularbuffer<double>* cb1, Circularbuffer<double>* cb2, Circularbuffer<double>* cb3, Circularbuffer<double>* cb4, int buffer_length)
+	PutSensor(Circularbuffer<double>* cb1, Circularbuffer<double>* cb2, Circularbuffer<double>* cb3, Circularbuffer<double>* cb4, int buffer_size)
 	{
 		cb1d = cb1;
 		cb2d = cb2;
