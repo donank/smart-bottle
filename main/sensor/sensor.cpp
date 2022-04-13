@@ -12,7 +12,7 @@ double sensor::getData(){
     return cb_.get(); //returns last inserted value from buffer
 }
 
-int sensor::getSize(){
+size_t sensor::getSize(){
     return cb_.size();
 }
 
