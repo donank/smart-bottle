@@ -6,7 +6,7 @@
  *
  */
 #include <assert.h>
-#include "circularbuffer.h"
+#include "../circularbuffer/circularbuffer.h"
 
 /**
  * Parent sensor class
