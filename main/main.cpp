@@ -1,8 +1,8 @@
 #include <iostream>
 #include "./rpi_ads1115/ads1115rpi.h"
 #include <chrono>
-#include "ph.h"
-#include "turbidity.h"
+#include "./ph/ph.h"
+#include "./turbidity/turbidity.h"
 #include<thread>
 #include<unistd.h>
 
