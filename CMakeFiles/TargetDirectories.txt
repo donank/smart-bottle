@@ -1,0 +1,13 @@
+/home/omkar/Documents/json_fastcgi_web_api/CMakeFiles/edit_cache.dir
+/home/omkar/Documents/json_fastcgi_web_api/CMakeFiles/rebuild_cache.dir
+/home/omkar/Documents/json_fastcgi_web_api/CMakeFiles/list_install_components.dir
+/home/omkar/Documents/json_fastcgi_web_api/CMakeFiles/install.dir
+/home/omkar/Documents/json_fastcgi_web_api/CMakeFiles/install/local.dir
+/home/omkar/Documents/json_fastcgi_web_api/CMakeFiles/install/strip.dir
+/home/omkar/Documents/json_fastcgi_web_api/fake_sensor_demo/CMakeFiles/demo_sensor_server.dir
+/home/omkar/Documents/json_fastcgi_web_api/fake_sensor_demo/CMakeFiles/edit_cache.dir
+/home/omkar/Documents/json_fastcgi_web_api/fake_sensor_demo/CMakeFiles/rebuild_cache.dir
+/home/omkar/Documents/json_fastcgi_web_api/fake_sensor_demo/CMakeFiles/list_install_components.dir
+/home/omkar/Documents/json_fastcgi_web_api/fake_sensor_demo/CMakeFiles/install.dir
+/home/omkar/Documents/json_fastcgi_web_api/fake_sensor_demo/CMakeFiles/install/local.dir
+/home/omkar/Documents/json_fastcgi_web_api/fake_sensor_demo/CMakeFiles/install/strip.dir

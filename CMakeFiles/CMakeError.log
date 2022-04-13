@@ -1,0 +1,100 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/omkar/Documents/json_fastcgi_web_api/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_2942e/fast"
+/usr/bin/make -f CMakeFiles/cmTC_2942e.dir/build.make CMakeFiles/cmTC_2942e.dir/build
+make[1]: Entering directory '/home/omkar/Documents/json_fastcgi_web_api/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_2942e.dir/CheckSymbolExists.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_2942e.dir/CheckSymbolExists.c.o   -c /home/omkar/Documents/json_fastcgi_web_api/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_2942e
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2942e.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_2942e.dir/CheckSymbolExists.c.o  -o cmTC_2942e -rdynamic 
+CMakeFiles/cmTC_2942e.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x16): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_2942e.dir/build.make:97: recipe for target 'cmTC_2942e' failed
+make[1]: *** [cmTC_2942e] Error 1
+make[1]: Leaving directory '/home/omkar/Documents/json_fastcgi_web_api/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_2942e/fast' failed
+make: *** [cmTC_2942e/fast] Error 2
+
+File /home/omkar/Documents/json_fastcgi_web_api/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/omkar/Documents/json_fastcgi_web_api/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_e6dfe/fast"
+/usr/bin/make -f CMakeFiles/cmTC_e6dfe.dir/build.make CMakeFiles/cmTC_e6dfe.dir/build
+make[1]: Entering directory '/home/omkar/Documents/json_fastcgi_web_api/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_e6dfe.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_e6dfe.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_e6dfe
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e6dfe.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_e6dfe.dir/CheckFunctionExists.c.o  -o cmTC_e6dfe -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_e6dfe.dir/build.make:97: recipe for target 'cmTC_e6dfe' failed
+make[1]: *** [cmTC_e6dfe] Error 1
+make[1]: Leaving directory '/home/omkar/Documents/json_fastcgi_web_api/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_e6dfe/fast' failed
+make: *** [cmTC_e6dfe/fast] Error 2
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/omkar/Documents/json_fastcgi_web_api/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_596f5/fast && /usr/bin/make  -f CMakeFiles/cmTC_596f5.dir/build.make CMakeFiles/cmTC_596f5.dir/build
+make[1]: Entering directory '/home/omkar/Documents/json_fastcgi_web_api/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_596f5.dir/src.c.o
+/usr/bin/cc -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_596f5.dir/src.c.o -c /home/omkar/Documents/json_fastcgi_web_api/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_596f5
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_596f5.dir/link.txt --verbose=1
+/usr/bin/cc -rdynamic CMakeFiles/cmTC_596f5.dir/src.c.o -o cmTC_596f5 
+CMakeFiles/cmTC_596f5.dir/src.c.o: In function `main':
+src.c:(.text+0x3e): undefined reference to `pthread_create'
+src.c:(.text+0x4a): undefined reference to `pthread_detach'
+src.c:(.text+0x56): undefined reference to `pthread_cancel'
+src.c:(.text+0x67): undefined reference to `pthread_join'
+src.c:(.text+0x7b): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_596f5.dir/build.make:98: recipe for target 'cmTC_596f5' failed
+make[1]: *** [cmTC_596f5] Error 1
+make[1]: Leaving directory '/home/omkar/Documents/json_fastcgi_web_api/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_596f5/fast' failed
+make: *** [cmTC_596f5/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+static void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
