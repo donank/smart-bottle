@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<title>Welcome to the Realtime Embedded Test server</title>
+	<style>
+	 body {
+             width: 35em;
+             margin: 0 5%;
+             font-family: Tahoma, Verdana, Arial, sans-serif;
+	     background-image: url('pexels-pixabay-355808.jpg'); 
+	     
+	 }
+	h1 {
+		width: 1190px;
+		height: 70px;
+		margin: 1em 0 0.5em 0;
+		font-weight: 600;
+		font-family: 'Titillium Web', sans-serif;
+		position: relative;  
+		font-size: 36px;
+		line-height: 40px;
+		padding: 15px 15px 15px 15%;
+		color: #355681;
+		box-shadow: 
+			inset 0 0 0 1px rgba(53,86,129, 0.4), 
+			inset 0 0 5px rgba(53,86,129, 0.5),
+			inset -285px 0 35px white;
+		
+		border-radius: 0 10px 0 10px;
+		background: Black;
+		box-sizing: border-box;
+	}
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js"></script>
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.css" />
+    </head>
+    <body>
+      <h1>OSUM Smart Bottle</h1>
+      <h2>Osum smart water bottle's, water quality results</h2>
+	
+	<table>
+	<tr>
+	<th>		
+	<p> Turbidity sensore</p>
+	<div id="div_g" style="width:400px; height:300px;"></div>
+	
+	<script type="text/javascript">
+	  // max samples for dygraph
+	  var maxSamples = 60;
+
+	  // relative path to the sensor data for get/post:
+	  var serverPath = "/sensor/:80";
+	  
+	  // callback when the Web page has been loaded
+	  $(document).ready(function() {
+	      var data = [];
+	      var g = new Dygraph(document.getElementById("div_g"), data,
+				  {
+				      drawPoints: true,
+				      labels: ['Time', 'Temperature'],
+				  });
+
+	      $("#driver").click(function(event){
+		  $.post( 
+                      serverPath,
+                      {
+			  temperature: 20,
+			  steps: 5,
+			  hello: "Hello, that's a test!"
+		      }
+		  );
+		  
+              });
+	      
+	      window.intervalId = setInterval(function() {
+		  // callback for interval timer for every second
+		  $.getJSON(serverPath,function(result){
+                      data = [];
+		      y = result.temperature[0];
+                      document.getElementById("temperature").innerHTML = Math.round(y * 100) / 100;
+                      for(let i = 0; i < result.time.length; i++) {
+			  const d = new Date();
+			  d.setUTCSeconds(result.time[i]/1000,result.time[i]%1000);
+			  var y = result.temperature[i];
+			  data.push([d, y]);
+		      }
+		      g.updateOptions( { 'file': data } );
+		  });
+	      }, 1000);
+	  });
+	</script>
+	</th>
+	<th>
+	<p> Conductivity sensor </p>
+	<div id="div_h" style="width:400px; height:300px;"></div>
+	
+	<script type="text/javascript">
+	  // max samples for dygraph
+	  var maxSamples = 60;
+
+	  // relative path to the sensor data for get/post:
+	  var serverPath = "/sensor/:80";
+	  
+	  // callback when the Web page has been loaded
+	  $(document).ready(function() {
+	      var data = [];
+	      var g = new Dygraph(document.getElementById("div_h"), data,
+				  {
+				      drawPoints: true,
+				      labels: ['Time', 'Temperature'],
+				  });
+
+	      $("#driver").click(function(event){
+		  $.post( 
+                      serverPath,
+                      {
+			  temperature: 20,
+			  steps: 5,
+			  hello: "Hello, that's a test!"
+		      }
+		  );
+		  
+              });
+	      
+	      window.intervalId = setInterval(function() {
+		  // callback for interval timer for every second
+		  $.getJSON(serverPath,function(result){
+                      data = [];
+		      y = result.temperature[0];
+                      document.getElementById("temperature").innerHTML = Math.round(y * 100) / 100;
+                      for(let i = 0; i < result.time.length; i++) {
+			  const d = new Date();
+			  d.setUTCSeconds(result.time[i]/1000,result.time[i]%1000);
+			  var y = result.temperature[i];
+			  data.push([d, y]);
+		      }
+		      g.updateOptions( { 'file': data } );
+		  });
+	      }, 1000);
+	  });
+	</script>
+	</th>
+	</tr>
+	<tr>
+	<th>
+		<p> Pressure sensor </p>
+	<div id="div_p" style="width:400px; height:300px;"></div>
+	
+	<script type="text/javascript">
+	  // max samples for dygraph
+	  var maxSamples = 60;
+
+	  // relative path to the sensor data for get/post:
+	  var serverPath = "/sensor/:80";
+	  
+	  // callback when the Web page has been loaded
+	  $(document).ready(function() {
+	      var data = [];
+	      var g = new Dygraph(document.getElementById("div_p"), data,
+				  {
+				      drawPoints: true,
+				      labels: ['Time', 'Temperature'],
+				  });
+
+	      $("#driver").click(function(event){
+		  $.post( 
+                      serverPath,
+                      {
+			  temperature: 20,
+			  steps: 5,
+			  hello: "Hello, that's a test!"
+		      }
+		  );
+		  
+              });
+	      
+	      window.intervalId = setInterval(function() {
+		  // callback for interval timer for every second
+		  $.getJSON(serverPath,function(result){
+                      data = [];
+		      y = result.temperature[0];
+                      document.getElementById("temperature").innerHTML = Math.round(y * 100) / 100;
+                      for(let i = 0; i < result.time.length; i++) {
+			  const d = new Date();
+			  d.setUTCSeconds(result.time[i]/1000,result.time[i]%1000);
+			  var y = result.temperature[i];
+			  data.push([d, y]);
+		      }
+		      g.updateOptions( { 'file': data } );
+		  });
+	      }, 1000);
+	  });
+	</script>
+	</th>
+	<th>
+	<p> Ph sensor </p>
+	<div id="div_ph" style="width:400px; height:300px;"></div>
+	
+	<script type="text/javascript">
+	  // max samples for dygraph
+	  var maxSamples = 60;
+
+	  // relative path to the sensor data for get/post:
+	  var serverPath = "/sensor/:80";
+	  
+	  // callback when the Web page has been loaded
+	  $(document).ready(function() {
+	      var data = [];
+	      var g = new Dygraph(document.getElementById("div_ph"), data,
+				  {
+				      drawPoints: true,
+				      labels: ['Time', 'Temperature'],
+				  });
+
+	      $("#driver").click(function(event){
+		  $.post( 
+                      serverPath,
+                      {
+			  temperature: 20,
+			  steps: 5,
+			  hello: "Hello, that's a test!"
+		      }
+		  );
+		  
+              });
+	      
+	      window.intervalId = setInterval(function() {
+		  // callback for interval timer for every second
+		  $.getJSON(serverPath,function(result){
+                      data = [];
+		      y = result.temperature[0];
+                      document.getElementById("temperature").innerHTML = Math.round(y * 100) / 100;
+                      for(let i = 0; i < result.time.length; i++) {
+			  const d = new Date();
+			  d.setUTCSeconds(result.time[i]/1000,result.time[i]%1000);
+			  var y = result.temperature[i];
+			  data.push([d, y]);
+		      }
+		      g.updateOptions( { 'file': data } );
+		  });
+	      }, 1000);
+	  });
+	</script>
+
+	</th>
+	</tr>
+	</table>
+	
+	<br />
+	<br />
+<br />
+<br />
+<input type = "button" id = "driver" value = "Force constant 20C" />
+<br />
+<br />
+	
+</body>
+</html>
