@@ -35,4 +35,5 @@ jobs:
           cd ${{ github.workspace }}
           mkdir build
           cd build
+          cmake ../main
           cmake --build .
