@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.1.0)
+project (ads1115_sensor_demo)
+add_executable(ads1115_server ads1115_server.cpp)
+set (CMAKE_CXX_STANDARD 11)
+find_package (Threads)
+TARGET_LINK_LIBRARIES(ads1115_server fcgi curl rt ${CMAKE_THREAD_LIBS_INIT} ads1115rpi)
