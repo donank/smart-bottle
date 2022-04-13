@@ -1,5 +1,5 @@
 #include <iostream>
-#include "ads1115rpi.h"
+#include "./rpi_ads1115/ads1115rpi.h"
 #include <chrono>
 #include "ph.h"
 #include "turbidity.h"
