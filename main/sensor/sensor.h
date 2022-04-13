@@ -21,6 +21,8 @@ public:
     std::string getName();
     void setData(double data);
     double getData();
+    int getSize();
+    void reset();
     virtual void calcThreshold() = 0;
 
 private:

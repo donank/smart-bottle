@@ -18,6 +18,7 @@ message("turbidity inluded")
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_executable(main main.cpp)
 
