@@ -6,7 +6,7 @@
  *
  */
 #include <assert.h>
-#include "sensor.h"
+#include "../sensor/sensor.h"
 
 /**
  * Turbidity sensor class
@@ -18,7 +18,7 @@ public:
 
     }
     
-    void calcThreshold();
+    void calcThreshold() override;
 private:
 
 };

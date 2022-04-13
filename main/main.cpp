@@ -21,7 +21,7 @@ class ADS1115Printer : public ADS1115rpi {
 
 			if(curr_time - start_time == 4){
 				flag = 0;
-				printf("\ncb1-1: %e", ph.get());
+				printf("\ncb1-1: %e", ph.getData());
 				printf("------------------------- \n");
 				stop();
 			}

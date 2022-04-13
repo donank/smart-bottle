@@ -6,7 +6,7 @@
  *
  */
 #include <assert.h>
-#include "sensor.h"
+#include "../sensor/sensor.h"
 
 /**
  * pH sensor class
@@ -19,7 +19,7 @@ public:
 
     }
     
-    void calcThreshold();
+    void calcThreshold() override;
 private:
 };
 
