@@ -8,7 +8,7 @@ message("top: CMAKE_CURRENT_SOURCE_DIR = ${CMAKE_CURRENT_SOURCE_DIR}")
 message("top: CMAKE_CURRENT_BINARY_DIR = ${CMAKE_CURRENT_BINARY_DIR}")
 
 #add_subdirectory(rpi_ads1115)
-add_subdirectory(circularbuffer)
+#add_subdirectory(circularbuffer)
 message("rpi included")
 add_subdirectory(sensor)
 add_subdirectory(ph)
