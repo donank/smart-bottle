@@ -12,9 +12,9 @@ add_library(circularbuffer
   ${LIBSRC}
   )
 
-set_target_properties(circularbuffer PROPERTIES
-  SOVERSION 1
-  PUBLIC_HEADER "${LIBINCLUDE}")
+#set_target_properties(circularbuffer PROPERTIES
+#  SOVERSION 1
+#  PUBLIC_HEADER "${LIBINCLUDE}")
 
 target_link_libraries(circularbuffer PUBLIC)
 
@@ -28,10 +28,10 @@ add_library(circularbuffer_static
   ${LIBSRC}
   )
 
-set_target_properties(circularbuffer_static PROPERTIES
-  PUBLIC_HEADER "${LIBINCLUDE}")
+#set_target_properties(circularbuffer_static PROPERTIES
+#  PUBLIC_HEADER "${LIBINCLUDE}")
 
-target_link_libraries(circularbuffer_static PUBLIC)
+target_link_libraries(circularbuffer_static)
 
 
 #install(TARGETS circularbuffer_static EXPORT circularbuffer_static-targets

@@ -2,8 +2,14 @@ cmake_minimum_required(VERSION 3.1.0)
 
 set(CMAKE_CXX_STANDARD 14)
 
-#add_subdirectory("../../sensor" "${CMAKE_CURRENT_BINARY_DIR}/../../../build/sensor")
-include_directories(../sensor)
+#add_subdirectory("../sensor" "$../../turbidity/sensor")
+#include(../sensor/CmakeLists.txt)
+include_directories(${CMAKE_SOURCE_DIR}/sensor)
+
+message("turbidity: CMAKE_SOURCE_DIR = ${CMAKE_SOURCE_DIR}")
+message("turbidity: CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
+message("turbidity: CMAKE_CURRENT_SOURCE_DIR = ${CMAKE_CURRENT_SOURCE_DIR}")
+message("turbidity: CMAKE_CURRENT_BINARY_DIR = ${CMAKE_CURRENT_BINARY_DIR}")
 
 project(turbidity VERSION 1.0.0 LANGUAGES CXX)
 include(GNUInstallDirs)
