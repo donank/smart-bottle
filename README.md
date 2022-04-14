@@ -5,7 +5,7 @@
 </p>
 
 
-[![Build Status](https://github.com/donank/smart-bottle/actions/workflows/CI.yml/badge.svg)](https://github.com/donank/smart-bottle/actions/)
+[![Build Status](https://github.com/donank/smart-bottle/actions/workflows/build.yml/badge.svg)](https://github.com/donank/smart-bottle/actions/)
 
 
 Winner of RS Grassroots Student Project Fund! https://www.rs-online.com/designspark/the-student-project-fund-2022-winners-announced
