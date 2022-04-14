@@ -2,19 +2,12 @@ cmake_minimum_required(VERSION 3.10)
 
 project(main VERSION 1.0)
 
-message("top: CMAKE_SOURCE_DIR = ${CMAKE_SOURCE_DIR}")
-message("top: CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
-message("top: CMAKE_CURRENT_SOURCE_DIR = ${CMAKE_CURRENT_SOURCE_DIR}")
-message("top: CMAKE_CURRENT_BINARY_DIR = ${CMAKE_CURRENT_BINARY_DIR}")
-
 add_subdirectory(ads1115rpi)
-#add_subdirectory(circularbuffer)
-message("rpi included")
 add_subdirectory(sensor)
 add_subdirectory(ph)
-message("ph included")
 add_subdirectory(turbidity)
-message("turbidity inluded")
+add_subdirectory(temperature)
+add_subdirectory(volume)
 find_package (Threads)
 
 set(CMAKE_CXX_STANDARD 11)
@@ -23,8 +16,8 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_executable(main main.cpp)
 
-target_link_libraries(main fcgi curl rt ${CMAKE_THREAD_LIBS_INIT} sensor_static ads1115rpi_static ph_static turbidity_static)
-target_include_directories(main PRIVATE sensor_static rpi_ads1115 ph turbidity)
+target_link_libraries(main fcgi curl rt ${CMAKE_THREAD_LIBS_INIT} ads1115rpi_static ph_static turbidity_static temperature_static volume_static)
+target_include_directories(main PRIVATE rpi_ads1115 ph turbidity temperature volume)
 
 
 

@@ -1,12 +1,15 @@
 #include <iostream>
 #include "ads1115rpi.h"
 #include <chrono>
-#include "ph.h"
-#include "turbidity.h"
 #include<thread>
 #include<unistd.h>
 #include "json_fastcgi_web_api.h"
 #include <string.h>
+
+#include "volume.h"
+#include "ph.h"
+#include "turbidity.h"
+#include "temperature.h"
 
 bool mainRunning = true;
 
@@ -39,6 +42,26 @@ void setHUPHandler() {
 		exit (-1);
 	}
 }
+class ADS1115PrinterVM : public volume {
+public:
+	std::deque<float> volumeValues;
+	const int maxBufSize = 50; 
+
+	virtual void hasSample(float v){
+		
+		volumeValues.push_back(v);
+		
+		if (volumeValues.size() > maxBufSize) volumeValues.pop_front();
+	}
+	
+	void forceValue(float a) {
+		
+		for(auto& v:volumeValues) {
+			v = a;
+		}
+	}
+};
+
 class ADS1115PrinterPH : public ph {
 public:
 	std::deque<float> phValues;
@@ -79,6 +102,26 @@ public:
 	}
 };
 
+class ADS1115PrinterTP : public temperature {
+public:
+	std::deque<float> temperatureValues;
+	const int maxBufSize = 50; 
+
+	virtual void hasSample(float v){
+		
+		temperatureValues.push_back(v);
+		
+		if (temperatureValues.size() > maxBufSize) temperatureValues.pop_front();
+	}
+	
+	void forceValue(float a) {
+		
+		for(auto& v:temperatureValues) {
+			v = a;
+		}
+	}
+};
+
 /**
  * Callback handler which returns data to the
  * nginx server.
@@ -91,17 +134,22 @@ private:
 	 * that would be probably a database class or a
 	 * controller keeping it all together.
 	 **/
+	ADS1115PrinterVM* sensorfastcgivm;
 	ADS1115PrinterPH* sensorfastcgiph;
 	ADS1115PrinterTB* sensorfastcgitb;
+	ADS1115PrinterTP* sensorfastcgitp;
 
 public:
 	/**
 	 * Constructor: argument is the ADC callback handler
 	 * which keeps the data as a simple example.
 	 **/
-	JSONCGIADCCallback(ADS1115PrinterPH* argSENSORfastcgiph, ADS1115PrinterTB* argSENSORfastcgitb) {
+	JSONCGIADCCallback(ADS1115PrinterVM* argSENSORfastcgivm, ADS1115PrinterPH* argSENSORfastcgiph, 
+	ADS1115PrinterTB* argSENSORfastcgitb, ADS1115PrinterTP* argSENSORfastcgitp) {
+		sensorfastcgivm = argSENSORfastcgivm;
 		sensorfastcgiph = argSENSORfastcgiph;
 		sensorfastcgitb = argSENSORfastcgitb;
+		sensorfastcgitp = argSENSORfastcgitp;
 	}
 
 	/**
@@ -110,10 +158,10 @@ public:
 	virtual std::string getJSONString() {
 		JSONCGIHandler::JSONGenerator jsonGenerator;
 		jsonGenerator.add("epoch",(long)time(NULL));
-		jsonGenerator.add("volumeValues",sensorfastcgiph->phValues);
+		jsonGenerator.add("volumeValues",sensorfastcgivm->volumeValues);
 		jsonGenerator.add("phValues",sensorfastcgiph->phValues);
 		jsonGenerator.add("turbidityValues",sensorfastcgitb->turbidityValues);
-		jsonGenerator.add("temperatureValues",sensorfastcgitb->turbidityValues);
+		jsonGenerator.add("temperatureValues",sensorfastcgitp->temperatureValues);
 		jsonGenerator.add("fs",(float)(sensorfastcgiph->getADS1115settings().getSamplingRate()));
 		return jsonGenerator.getJSON();
 	}
@@ -124,9 +172,12 @@ public:
  **/
 class SENSORPOSTCallback : public JSONCGIHandler::POSTCallback {
 public:
-	SENSORPOSTCallback(ADS1115PrinterPH* argSENSORfastcgiph, ADS1115PrinterTB* argSENSORfastcgitb) {
+	SENSORPOSTCallback(ADS1115PrinterVM* argSENSORfastcgivm, ADS1115PrinterPH* argSENSORfastcgiph, 
+	ADS1115PrinterTB* argSENSORfastcgitb, ADS1115PrinterTP* argSENSORfastcgitp) {
+		sensorfastcgivm = argSENSORfastcgivm;
 		sensorfastcgiph = argSENSORfastcgiph;
 		sensorfastcgitb = argSENSORfastcgitb;
+		sensorfastcgitp = argSENSORfastcgitp;
 	}
 
 	/**
@@ -143,24 +194,30 @@ public:
 	/**
 	 * Pointer to the handler which keeps the adc values
 	 **/
+	ADS1115PrinterVM* sensorfastcgivm;
 	ADS1115PrinterPH* sensorfastcgiph;
 	ADS1115PrinterTB* sensorfastcgitb;
+	ADS1115PrinterTP* sensorfastcgitp;
 };
 
 
 int main(int argc, char *argv[]) {
 
+	ADS1115PrinterVM sensorcommvm;
 	ADS1115PrinterPH sensorcommph;
 	ADS1115PrinterTB sensorcommtb;
-	JSONCGIADCCallback fastCGIADCCallback(&sensorcommph, &sensorcommtb);
-	SENSORPOSTCallback postCallback(&sensorcommph, &sensorcommtb);
+	ADS1115PrinterTP sensorcommtp;
+	JSONCGIADCCallback fastCGIADCCallback(&sensorcommvm, &sensorcommph, &sensorcommtb, &sensorcommtp);
+	SENSORPOSTCallback postCallback(&sensorcommvm, &sensorcommph, &sensorcommtb, &sensorcommtp);
 	
 	JSONCGIHandler* fastCGIHandler = new JSONCGIHandler(&fastCGIADCCallback,
 							    &postCallback,
 							    "/tmp/sensorsocket");
 
+	sensorcommvm.startThread();
 	sensorcommph.startThread();
 	sensorcommtb.startThread();
+	sensorcommtp.startThread();
 	setHUPHandler();
 
     fprintf(stderr,"'%s' up and running.\n",argv[0]);

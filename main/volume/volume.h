@@ -1,16 +1,16 @@
-#ifndef __PH_H
-#define __PH_H
+#ifndef __VOLUME_H
+#define __VOLUME_H
 
 #include "../sensor/sensor.h"
 
 /**
- * pH sensor class
+ * Volume sensor class
  **/
-class ph : public sensor {
+class volume : public sensor {
 
 public:
     public:
-    ph(): sensor("ph", 1){
+    volume(): sensor("volume", 0){
 
     }
     
