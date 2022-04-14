@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Welcome to the Realtime Embedded Test server</title>
+	<style>
+		body {
+			width: 35em;
+			margin: 0 5%;
+			font-family: Tahoma, Verdana, Arial, sans-serif;
+			background-image: url('pexels-pixabay-355808.jpg');
+
+		}
+
+		h1 {
+			width: 1190px;
+			height: 70px;
+			margin: 1em 0 0.5em 0;
+			font-weight: 600;
+			font-family: 'Titillium Web', sans-serif;
+			position: relative;
+			font-size: 36px;
+			line-height: 40px;
+			padding: 15px 15px 15px 15%;
+			color: #355681;
+			box-shadow:
+				inset 0 0 0 1px rgba(53, 86, 129, 0.4),
+				inset 0 0 5px rgba(53, 86, 129, 0.5),
+				inset -285px 0 35px white;
+
+			border-radius: 0 10px 0 10px;
+			background: Black;
+			box-sizing: border-box;
+		}
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js"></script>
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.css" />
+</head>
+
+<body>
+	<h1>Oshun Smart Bottle</h1>
+	<h2>Oshun smart water bottle's, water quality results</h2>
+	<h3>fs = <span id="fs">00</span> Hz</h3>
+	<table>
+		<tr>
+			<th>
+				<p> Water Sensor</p>
+				<div id="div_g" style="width:400px; height:300px;"></div>
+
+				<script type="text/javascript">
+					// max samples for dygraph
+					var maxSamples = 60;
+
+					// relative path to the sensor data for get/post:
+					var serverPath = "/sensor/:80";
+
+					// callback when the Web page has been loaded
+					$(document).ready(function () {
+						var data = [];
+						var g = new Dygraph(document.getElementById("div_g"), data,
+							{
+								drawPoints: true,
+								labels: ['Time', 'Volume'],
+							});
+
+						$("#driver").click(function (event) {
+							$.post(
+								serverPath,
+								{
+									temperature: 20,
+									steps: 5,
+									hello: "Hello, that's a test!"
+								}
+							);
+
+						});
+
+						window.intervalId = setInterval(function () {
+							// callback for interval timer for every second
+							$.getJSON(serverPath, function (result) {
+								data = [];
+								var dt = 1.0 / result.fs;
+								var t = 0;
+								document.getElementById("fs").innerHTML = result.fs;
+								for (let i = 0; i < result.volumeValues.length; i++) {
+									var y = result.volumeValues[i];
+									data.push([t, y]);
+									t = t + dt;
+								}
+								g.updateOptions({ 'file': data });
+							});
+						}, 1000);
+					});
+				</script>
+			</th>
+			<th>
+				<p> pH sensor </p>
+				<div id="div_h" style="width:400px; height:300px;"></div>
+
+				<script type="text/javascript">
+					// max samples for dygraph
+					var maxSamples = 60;
+
+					// relative path to the sensor data for get/post:
+					var serverPath = "/sensor/:80";
+
+					// callback when the Web page has been loaded
+					$(document).ready(function () {
+						var data = [];
+						var g = new Dygraph(document.getElementById("div_h"), data,
+							{
+								drawPoints: true,
+								labels: ['Time', 'pH'],
+							});
+
+						window.intervalId = setInterval(function () {
+							// callback for interval timer for every second
+							$.getJSON(serverPath, function (result) {
+								data = [];
+								var dt = 1.0 / result.fs;
+								var t = 0;
+								for (let i = 0; i < result.phValues.length; i++) {
+									var y = result.phValues[i];
+									data.push([t, y]);
+									t = t + dt;
+								}
+								g.updateOptions({ 'file': data });
+							});
+						}, 1000);
+					});
+				</script>
+			</th>
+		</tr>
+		<tr>
+			<th>
+				<p> Turbidity Sensor </p>
+				<div id="div_p" style="width:400px; height:300px;"></div>
+
+				<script type="text/javascript">
+					// max samples for dygraph
+					var maxSamples = 60;
+
+					// relative path to the sensor data for get/post:
+					var serverPath = "/sensor/:80";
+
+					// callback when the Web page has been loaded
+					$(document).ready(function () {
+						var data = [];
+						var g = new Dygraph(document.getElementById("div_p"), data,
+							{
+								drawPoints: true,
+								labels: ['Time', 'Turbidity'],
+							});
+
+						window.intervalId = setInterval(function () {
+							// callback for interval timer for every second
+							$.getJSON(serverPath, function (result) {
+								data = [];
+								var dt = 1.0 / result.fs;
+								var t = 0;
+								for (let i = 0; i < result.turbidityValues.length; i++) {
+									var y = result.turbidityValues[i];
+									data.push([t, y]);
+									t = t + dt;
+								}
+								g.updateOptions({ 'file': data });
+							});
+						}, 1000);
+					});
+				</script>
+			</th>
+			<th>
+				<p> Temperature sensor </p>
+				<div id="div_ph" style="width:400px; height:300px;"></div>
+
+				<script type="text/javascript">
+					// max samples for dygraph
+					var maxSamples = 60;
+
+					// relative path to the sensor data for get/post:
+					var serverPath = "/sensor/:80";
+
+					// callback when the Web page has been loaded
+					$(document).ready(function () {
+						var data = [];
+						var g = new Dygraph(document.getElementById("div_ph"), data,
+							{
+								drawPoints: true,
+								labels: ['Time', 'Temperature'],
+							});
+
+						window.intervalId = setInterval(function () {
+							// callback for interval timer for every second
+							$.getJSON(serverPath, function (result) {
+								data = [];
+								var dt = 1.0 / result.fs;
+								var t = 0;
+								for (let i = 0; i < result.temperatureValues.length; i++) {
+									var y = result.temperatureValues[i];
+									data.push([t, y]);
+									t = t + dt;
+								}
+								g.updateOptions({ 'file': data });
+							});
+						}, 1000);
+					});
+				</script>
+
+			</th>
+		</tr>
+	</table>
+
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+
+</body>
+
+</html>

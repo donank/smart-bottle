@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: build
 
 # Controls when the workflow will run
 on:
@@ -39,37 +39,4 @@ jobs:
           cd build
           cmake ../main
           cmake --build .
-  analyze:
-    name: Analyze
-    runs-on: self-hosted
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
-
-    strategy:
-      fail-fast: false
-      matrix:
-        language: [ 'cpp' ]
-        # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby' ]
-        # Learn more about CodeQL language support at https://git.io/codeql-language-support
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
-    # Initializes the CodeQL tools for scanning.
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v2
-      with:
-        languages: ${{ matrix.language }}
-      
-    - run: |
-          cd ${{ github.workspace }}
-          mkdir build
-          cd build
-          cmake ../main
-          cmake --build .
-
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v2
+  

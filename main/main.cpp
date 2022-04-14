@@ -44,19 +44,34 @@ void setHUPHandler() {
 }
 class ADS1115Printer : public ADS1115rpi {
 public:
-	std::deque<float> values;
+	std::deque<float> volumeValues;
+	std::deque<float> phValues;
+	std::deque<float> turbidityValues;
+	std::deque<float> temperatureValues;
+
 	const int maxBufSize = 50; 
 	std::string sensorType;
 
 	virtual void hasSample(float v){
-	
-		values.push_back(v);
-		if (values.size() > maxBufSize) values.pop_front();
+		
+		if(sensorType == "volume"){
+			volumeValues.push_back(v);
+		}else if(sensorType == "ph"){
+			phValues.push_back(v);
+		}else if(sensorType == "turbidity"){
+			turbidityValues.push_back(v);
+		}else if(sensorType == "temperature"){
+			temperatureValues.push_back(v);
+		}
+		if (volumeValues.size() > maxBufSize) volumeValues.pop_front();
+		if (phValues.size() > maxBufSize) phValues.pop_front();
+		if (turbidityValues.size() > maxBufSize) turbidityValues.pop_front();
+		if (temperatureValues.size() > maxBufSize) temperatureValues.pop_front();
 	}
 	
 	void forceValue(float a) {
 		
-		for(auto& v:values) {
+		for(auto& v:volumeValues) {
 			v = a;
 		}
 	}
@@ -95,9 +110,11 @@ public:
 	virtual std::string getJSONString() {
 		JSONCGIHandler::JSONGenerator jsonGenerator;
 		jsonGenerator.add("epoch",(long)time(NULL));
-		jsonGenerator.add("type",sensorfastcgi->sensorType);
-		jsonGenerator.add("values",sensorfastcgi->values);
-		jsonGenerator.add("phValues",sensorfastcgi->values);
+		//jsonGenerator.add("type",sensorfastcgi->sensorType);
+		jsonGenerator.add("volumeValues",sensorfastcgi->volumeValues);
+		jsonGenerator.add("phValues",sensorfastcgi->phValues);
+		jsonGenerator.add("turbidityValues",sensorfastcgi->turbidityValues);
+		jsonGenerator.add("temperatureValues",sensorfastcgi->temperatureValues);
 		jsonGenerator.add("fs",(float)(sensorfastcgi->getADS1115settings().getSamplingRate()));
 		return jsonGenerator.getJSON();
 	}
@@ -204,7 +221,8 @@ int main(int argc, char *argv[]) {
         std::time_t curr_time = system_clock::to_time_t (system_clock::now());
         if(curr_time - start_time == 20){
                 flag4 = 0;
-                printf("volume check finished \n");
+				flag1 = 1;
+                printf("temperature check finished \n");
                 sensorcomm.stop();
 
         } 
