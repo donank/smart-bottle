@@ -15,6 +15,7 @@ add_subdirectory(ph)
 message("ph included")
 add_subdirectory(turbidity)
 message("turbidity inluded")
+find_package (Threads)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -22,7 +23,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_executable(main main.cpp)
 
-target_link_libraries(main ads1115rpi_static ph_static turbidity_static)
+target_link_libraries(main fcgi curl rt ${CMAKE_THREAD_LIBS_INIT} ads1115rpi_static ph_static turbidity_static)
 target_include_directories(main PRIVATE rpi_ads1115 ph turbidity)
 
 
