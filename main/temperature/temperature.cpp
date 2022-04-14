@@ -8,22 +8,24 @@ float temperature::getTemperature(){
     return temperature_;
 }
 
-void temperature::setType(temperature::TYPE type){
+void temperature::setType(std::string type){
     type_ = type;
 }
 
-temperature::TYPE temperature::getType(){
+std::string temperature::getType(){
     return type_;
 }
 
 
 void temperature::calcThreshold(){
-    float latestValue = getData().front();
-    if(latestValue > 0.4){
-        setType(temperature::TYPE::HOT);
-    }else if(latestValue < 0.3){
-        setType(temperature::TYPE::COLD);
+    for(auto& v:getData()) {
+	    if(v > 0.4){
+        setType(temperature::TYPE[0]);
+    }else if(v < 0.3){
+        setType(temperature::TYPE[1]);
     }else{
-        setType(temperature::TYPE::NORMAL);
-    }
+        setType(temperature::TYPE[2]);
+    }	
+	}
+    
 }

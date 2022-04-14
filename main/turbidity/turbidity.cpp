@@ -1,20 +1,20 @@
 #include "turbidity.h"
 
-void turbidity::setType(turbidity::TYPE type){
+void turbidity::setType(std::string type){
     type_ = type;
 }
     
-turbidity::TYPE turbidity::getType(){
+std::string turbidity::getType(){
     return type_;
 }
 
 void turbidity::calcThreshold(){
     float latestValue = getData().front();
     if(latestValue > 0.4){
-        setType(turbidity::TYPE::OPAQUE);
+        setType(turbidity::TYPE[2]);
     }else if(latestValue < 0.3){
-        setType(turbidity::TYPE::TRANSPARENT);
+        setType(turbidity::TYPE[0]);
     }else{
-        setType(turbidity::TYPE::TRANSLUSCENT);
+        setType(turbidity::TYPE[1]);
     }
 }

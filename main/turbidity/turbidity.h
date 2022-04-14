@@ -15,20 +15,20 @@
 class turbidity : public sensor {
 
 public:
-enum TYPE
+std::string TYPE[3] = 
    {
-      TRANSPARENT,
-      TRANSLUSCENT,
-      OPAQUE
+      "TRANSPARENT",
+      "TRANSLUSCENT",
+      "OPAQUE"
    };
     turbidity(): sensor(ADS1115settings::AIN2){
 
     }
-    void setType(turbidity::TYPE type);
-    turbidity::TYPE getType();
+    void setType(std::string type);
+    std::string getType();
     void calcThreshold() override;
 private:
-    turbidity::TYPE type_;
+    std::string type_;
 };
 
 

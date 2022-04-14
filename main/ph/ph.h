@@ -9,23 +9,23 @@
 class ph : public sensor {
 
 public:
-    enum TYPE
+std::string TYPE[3] = 
    {
-      ACID,
-      BASE,
-      NEUTRAL
+      "ACID",
+      "BASE",
+      "NEUTRAL"
    };
 
     ph(): sensor(ADS1115settings::AIN1){
 
     }
     
-    void setType(ph::TYPE type);
-    ph::TYPE getType();
+    void setType(std::string type);
+    std::string getType();
     void calcThreshold() override;
     
 private:
-    ph::TYPE type_;
+    std::string type_;
 };
 
 

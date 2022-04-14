@@ -48,12 +48,12 @@ public:
 
 	virtual void hasSample(float v){
 		setData(v);
-		
+		calcThreshold();
 		if (getSize() > maxBufSize) popFront();
 	}
 	
 	void forceValue(float a) {
-	
+		
 		for(auto& v:getData()) {
 			v = a;
 		}
@@ -66,12 +66,12 @@ public:
 
 	virtual void hasSample(float v){
 		setData(v);
-		
+		calcThreshold();
 		if (getSize() > maxBufSize) popFront();
 	}
 	
 	void forceValue(float a) {
-	
+
 		for(auto& v:getData()) {
 			v = a;
 		}
@@ -84,7 +84,7 @@ public:
 
 	virtual void hasSample(float v){
 		setData(v);
-		
+		calcThreshold();
 		if (getSize() > maxBufSize) popFront();
 	}
 	
@@ -102,7 +102,7 @@ public:
 
 	virtual void hasSample(float v){
 		setData(v);
-		
+		calcThreshold();
 		if (getSize() > maxBufSize) popFront();
 	}
 	
@@ -132,6 +132,20 @@ private:
 	ADS1115PrinterTP* sensorfastcgitp;
 
 public:
+	bool drinkable(ADS1115PrinterVM* argVM, ADS1115PrinterPH* argPH, 
+	ADS1115PrinterTB* argTB, ADS1115PrinterTP* argTP){
+		bool drinkable = false;
+		if(argVM->waterDetected()){
+			if(argPH->getType() == argPH->TYPE[2] && argTB->getType() == argTB->TYPE[0]){
+				drinkable = true;
+			}else{
+				drinkable = false;
+			}
+		}else{
+			drinkable = false;
+		}
+		return drinkable;
+}
 	/**
 	 * Constructor: argument is the ADC callback handler
 	 * which keeps the data as a simple example.
@@ -148,12 +162,18 @@ public:
 	 * Gets the data sends it to the webserver -> client.
 	 **/
 	virtual std::string getJSONString() {
+		drinkable(sensorfastcgivm, sensorfastcgiph, sensorfastcgitb, sensorfastcgitp);
 		JSONCGIHandler::JSONGenerator jsonGenerator;
 		jsonGenerator.add("epoch",(long)time(NULL));
 		jsonGenerator.add("volumeValues",sensorfastcgivm->getData());
+		jsonGenerator.add("waterDetected",sensorfastcgivm->waterDetected());
 		jsonGenerator.add("phValues",sensorfastcgiph->getData());
+		jsonGenerator.add("phType",sensorfastcgiph->getType());
 		jsonGenerator.add("turbidityValues",sensorfastcgitb->getData());
+		jsonGenerator.add("turbidityType",sensorfastcgitb->getType());
 		jsonGenerator.add("temperatureValues",sensorfastcgitp->getData());
+		jsonGenerator.add("temperatureType",sensorfastcgitp->getType());
+		jsonGenerator.add("drinkable",drinkable(sensorfastcgivm, sensorfastcgiph, sensorfastcgitb, sensorfastcgitp));
 		jsonGenerator.add("fs",(float)(sensorfastcgiph->getADS1115settings().getSamplingRate()));
 		return jsonGenerator.getJSON();
 	}
@@ -193,6 +213,7 @@ public:
 };
 
 
+
 int main(int argc, char *argv[]) {
 
 	ADS1115PrinterVM sensorcommvm;
@@ -205,15 +226,16 @@ int main(int argc, char *argv[]) {
 	JSONCGIHandler* fastCGIHandler = new JSONCGIHandler(&fastCGIADCCallback,
 							    &postCallback,
 							    "/tmp/sensorsocket");
+	setHUPHandler();
+
+	fprintf(stderr,"'%s' up and running.\n",argv[0]);
 
 	sensorcommvm.startThread();
 	sensorcommph.startThread();
 	sensorcommtb.startThread();
 	sensorcommtp.startThread();
-	setHUPHandler();
 
-    fprintf(stderr,"'%s' up and running.\n",argv[0]);
-	
+	fprintf(stderr,"'%s' finished running. You can exit\n",argv[0]);
 	while (mainRunning) sleep(1);
 		
 	// stops the fast CGI handlder
