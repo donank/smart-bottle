@@ -47,4 +47,3 @@ Note: Sensor units are composed of pre-filters and amplifiers to attenuate noise
 [1] https://phys.org/news/2016-12-world-solid-state-multi-ion-sensor-internet.html
 
 [2] https://pubs.acs.org/doi/full/10.1021/acs.analchem.7b00843
->>>>>>> efbf0eb637cbf27f73d188c2cbda5974adcc6620
