@@ -46,3 +46,7 @@ void sensor::startThread(){
     this->join();
 }
 
+ADS1115settings::Input sensor::getChannel(){
+    return channel_;
+}
+

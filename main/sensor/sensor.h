@@ -25,17 +25,13 @@ protected:
 class sensor: public ADS1115rpi, CppThreadInterface {
 
 public:
-    sensor(const std::string& name, int channel){
+    sensor(const std::string& name, ADS1115settings::Input channel){
         name_ = name;
-        switch(channel){
-            case 0: channel_ = ADS1115settings::AIN0;
-            case 1: channel_ = ADS1115settings::AIN1;
-            case 2: channel_ = ADS1115settings::AIN2;
-            case 3: channel_ = ADS1115settings::AIN3;
-        }
+        channel_ = channel;
     }
     
     std::string getName();
+    ADS1115settings::Input getChannel();
     void setData(double data);
     double getData();
     size_t getSize();

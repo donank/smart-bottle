@@ -48,7 +48,6 @@ public:
 	const int maxBufSize = 50; 
 
 	virtual void hasSample(float v){
-		
 		volumeValues.push_back(v);
 		
 		if (volumeValues.size() > maxBufSize) volumeValues.pop_front();
@@ -68,7 +67,6 @@ public:
 	const int maxBufSize = 50; 
 
 	virtual void hasSample(float v){
-		
 		phValues.push_back(v);
 		
 		if (phValues.size() > maxBufSize) phValues.pop_front();

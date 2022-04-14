@@ -2,7 +2,7 @@
 #define __PH_H
 
 #include "../sensor/sensor.h"
-
+#include "../ads1115rpi/ads1115rpi.h"
 /**
  * pH sensor class
  **/
@@ -10,7 +10,7 @@ class ph : public sensor {
 
 public:
     public:
-    ph(): sensor("ph", 1){
+    ph(): sensor("ph", ADS1115settings::AIN1){
 
     }
     
