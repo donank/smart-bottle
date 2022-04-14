@@ -2,10 +2,6 @@
 #include <chrono>
 #include <thread>
 
-std::string sensor::getName(){
-    return name_;
-}
-
 void sensor::setData(float data){
     //cb_.put(data);
     values.push_back(data);

@@ -10,13 +10,23 @@
 class temperature : public sensor {
 
 public:
-    public:
-    temperature(): sensor("temperature", ADS1115settings::AIN3){
+    enum TYPE
+   {
+      HOT,
+      COLD,
+      NORMAL
+   };
+    temperature(): sensor(ADS1115settings::AIN3){
 
     }
-    
+    void setTemperature(float voltage);
+    float getTemperature();
+    void setType(temperature::TYPE type);
+    temperature::TYPE getType();
     void calcThreshold() override;
 private:
+    float temperature_;
+    temperature::TYPE type_;
 };
 
 

@@ -11,12 +11,13 @@ class volume : public sensor {
 
 public:
     public:
-    volume(): sensor("volume", ADS1115settings::AIN0){
+    volume(): sensor(ADS1115settings::AIN0){
 
     }
-    
+    bool waterDetected();
     void calcThreshold() override;
 private:
+    bool waterDetected_;
 };
 
 
