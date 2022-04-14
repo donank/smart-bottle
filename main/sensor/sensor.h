@@ -6,7 +6,7 @@
  *
  */
 #include <assert.h>
-#include "circularbuffer.h"
+#include "../circularbuffer/circularbuffer.h"
 
 /**
  * Parent sensor class
@@ -21,6 +21,8 @@ public:
     std::string getName();
     void setData(double data);
     double getData();
+    size_t getSize();
+    void reset();
     virtual void calcThreshold() = 0;
 
 private:

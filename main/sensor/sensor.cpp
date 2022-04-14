@@ -12,3 +12,10 @@ double sensor::getData(){
     return cb_.get(); //returns last inserted value from buffer
 }
 
+size_t sensor::getSize(){
+    return cb_.size();
+}
+
+void sensor::reset(){
+    cb_.reset();
+}

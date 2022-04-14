@@ -54,7 +54,7 @@ lib/*
 bin/*
 test/test_runner
 
-CMakeLists.txt.user
+#CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles
 CMakeScripts
