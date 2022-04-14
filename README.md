@@ -4,11 +4,13 @@
 </p>
 
 <div align="center">
+  
 ![Contributors](https://img.shields.io/github/contributors/donank/smart-bottle?style=for-the-badge)
 [![License](https://img.shields.io/github/license/donank/smart-bottle?style=for-the-badge)](https://github.com/donank/smart-bottle/blob/main/LICENSE)
 
 ![Build Status](https://github.com/donank/smart-bottle/actions/workflows/ci.yml/badge.svg)
-
+  
+</dev>
 
 Winner of RS Grassroots Student Project Fund! https://www.rs-online.com/designspark/the-student-project-fund-2022-winners-announced
 # Ọ̀ṣun: A Smart Water Bottle
