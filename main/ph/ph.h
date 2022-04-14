@@ -15,7 +15,7 @@ class ph : public sensor {
 
 public:
     public:
-    ph(): sensor("ph"){
+    ph(): sensor("ph", 1){
 
     }
     

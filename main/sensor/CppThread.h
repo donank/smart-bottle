@@ -10,14 +10,14 @@
 
 #include <thread>
 
- /**
-  * A thin wrapper around the C++ thread model to avoid
-  * a static callback. Instead just inherit this class
-  * and overload run() which then runs in this thread.
-  * This is header-only so that it can be performed
-  * inline for max performance.
-  **/
-class Thread {
+/**
+ * A thin wrapper around the C++ thread model to avoid
+ * a static callback. Instead just inherit this class
+ * and overload run() which then runs in this thread.
+ * This is header-only so that it can be performed
+ * inline for max performance.
+ **/
+class CppThread {
 
 public:
 	/**
@@ -25,7 +25,7 @@ public:
 	 **/
 	inline void start() {
 		if (nullptr == uthread) {
-			uthread = new std::thread(Thread::exec, this);
+			uthread = new std::thread(CppThread::exec, this);
 		}
 	}
 
@@ -40,24 +40,22 @@ public:
 		}
 	}
 
-	std::thread* uthread = nullptr;
-
-	// static function which points back to the instance
-	static void exec(Thread* Thread) {
-		Thread->run();
-	}
-
 protected:
 	/**
 	 * This method does all the work of this thread.
-		 * Overload this abstract function with
+         * Overload this abstract function with 
 	 * a real one doing the actual work of this thread.
 	 **/
-	virtual void run() = 0;
+	virtual void run() = 0;	
 
 private:
 	// pointer to the thread
-	
+	std::thread* uthread = nullptr;
+
+	// static function which points back to the instance
+	static void exec(CppThread* cppThread) {
+		cppThread->run();
+	}
 };
 
 

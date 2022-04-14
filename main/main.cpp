@@ -8,9 +8,6 @@
 #include "json_fastcgi_web_api.h"
 #include <string.h>
 
-ph ph;
-turbidity tb;
-
 bool mainRunning = true;
 
 /**
@@ -42,42 +39,43 @@ void setHUPHandler() {
 		exit (-1);
 	}
 }
-class ADS1115Printer : public ADS1115rpi {
+class ADS1115PrinterPH : public ph {
 public:
-	std::deque<float> volumeValues;
 	std::deque<float> phValues;
-	std::deque<float> turbidityValues;
-	std::deque<float> temperatureValues;
-
 	const int maxBufSize = 50; 
-	std::string sensorType;
 
 	virtual void hasSample(float v){
 		
-		if(sensorType == "volume"){
-			volumeValues.push_back(v);
-		}else if(sensorType == "ph"){
-			phValues.push_back(v);
-		}else if(sensorType == "turbidity"){
-			turbidityValues.push_back(v);
-		}else if(sensorType == "temperature"){
-			temperatureValues.push_back(v);
-		}
-		if (volumeValues.size() > maxBufSize) volumeValues.pop_front();
+		phValues.push_back(v);
+		
 		if (phValues.size() > maxBufSize) phValues.pop_front();
-		if (turbidityValues.size() > maxBufSize) turbidityValues.pop_front();
-		if (temperatureValues.size() > maxBufSize) temperatureValues.pop_front();
 	}
 	
 	void forceValue(float a) {
 		
-		for(auto& v:volumeValues) {
+		for(auto& v:phValues) {
 			v = a;
 		}
 	}
+};
 
-	void setSensor(std::string str){
-		sensorType = str;
+class ADS1115PrinterTB : public turbidity {
+public:
+	std::deque<float> turbidityValues;
+	const int maxBufSize = 50; 
+
+	virtual void hasSample(float v){
+		
+		turbidityValues.push_back(v);
+		
+		if (turbidityValues.size() > maxBufSize) turbidityValues.pop_front();
+	}
+	
+	void forceValue(float a) {
+		
+		for(auto& v:turbidityValues) {
+			v = a;
+		}
 	}
 };
 
@@ -93,15 +91,17 @@ private:
 	 * that would be probably a database class or a
 	 * controller keeping it all together.
 	 **/
-	ADS1115Printer* sensorfastcgi;
+	ADS1115PrinterPH* sensorfastcgiph;
+	ADS1115PrinterTB* sensorfastcgitb;
 
 public:
 	/**
 	 * Constructor: argument is the ADC callback handler
 	 * which keeps the data as a simple example.
 	 **/
-	JSONCGIADCCallback(ADS1115Printer* argSENSORfastcgi) {
-		sensorfastcgi = argSENSORfastcgi;
+	JSONCGIADCCallback(ADS1115PrinterPH* argSENSORfastcgiph, ADS1115PrinterTB* argSENSORfastcgitb) {
+		sensorfastcgiph = argSENSORfastcgiph;
+		sensorfastcgitb = argSENSORfastcgitb;
 	}
 
 	/**
@@ -110,12 +110,11 @@ public:
 	virtual std::string getJSONString() {
 		JSONCGIHandler::JSONGenerator jsonGenerator;
 		jsonGenerator.add("epoch",(long)time(NULL));
-		//jsonGenerator.add("type",sensorfastcgi->sensorType);
-		jsonGenerator.add("volumeValues",sensorfastcgi->volumeValues);
-		jsonGenerator.add("phValues",sensorfastcgi->phValues);
-		jsonGenerator.add("turbidityValues",sensorfastcgi->turbidityValues);
-		jsonGenerator.add("temperatureValues",sensorfastcgi->temperatureValues);
-		jsonGenerator.add("fs",(float)(sensorfastcgi->getADS1115settings().getSamplingRate()));
+		jsonGenerator.add("volumeValues",sensorfastcgiph->phValues);
+		jsonGenerator.add("phValues",sensorfastcgiph->phValues);
+		jsonGenerator.add("turbidityValues",sensorfastcgitb->turbidityValues);
+		jsonGenerator.add("temperatureValues",sensorfastcgitb->turbidityValues);
+		jsonGenerator.add("fs",(float)(sensorfastcgiph->getADS1115settings().getSamplingRate()));
 		return jsonGenerator.getJSON();
 	}
 };
@@ -125,8 +124,9 @@ public:
  **/
 class SENSORPOSTCallback : public JSONCGIHandler::POSTCallback {
 public:
-	SENSORPOSTCallback(ADS1115Printer* argSENSORfastcgi) {
-		sensorfastcgi = argSENSORfastcgi;
+	SENSORPOSTCallback(ADS1115PrinterPH* argSENSORfastcgiph, ADS1115PrinterTB* argSENSORfastcgitb) {
+		sensorfastcgiph = argSENSORfastcgiph;
+		sensorfastcgitb = argSENSORfastcgitb;
 	}
 
 	/**
@@ -137,97 +137,33 @@ public:
 		auto m = JSONCGIHandler::postDecoder(postArg);
 		float temp = atof(m["volt"].c_str());
 		std::cerr << m["hello"] << "\n";
-		sensorfastcgi->forceValue(temp);
+		sensorfastcgiph->forceValue(temp);
 	}
 
 	/**
 	 * Pointer to the handler which keeps the adc values
 	 **/
-	ADS1115Printer* sensorfastcgi;
+	ADS1115PrinterPH* sensorfastcgiph;
+	ADS1115PrinterTB* sensorfastcgitb;
 };
 
 
 int main(int argc, char *argv[]) {
-	ADS1115Printer sensorcomm;
-	JSONCGIADCCallback fastCGIADCCallback(&sensorcomm);
-	SENSORPOSTCallback postCallback(&sensorcomm);
+
+	ADS1115PrinterPH sensorcommph;
+	ADS1115PrinterTB sensorcommtb;
+	JSONCGIADCCallback fastCGIADCCallback(&sensorcommph, &sensorcommtb);
+	SENSORPOSTCallback postCallback(&sensorcommph, &sensorcommtb);
 	
 	JSONCGIHandler* fastCGIHandler = new JSONCGIHandler(&fastCGIADCCallback,
 							    &postCallback,
 							    "/tmp/sensorsocket");
 
+	sensorcommph.startThread();
+	sensorcommtb.startThread();
 	setHUPHandler();
 
     fprintf(stderr,"'%s' up and running.\n",argv[0]);
-    ADS1115settings s;
-	s.samplingRate = ADS1115settings::FS8HZ;
-	using std::chrono::system_clock;
-    std::time_t start_time = system_clock::to_time_t (system_clock::now());
-    int flag1 = 1;
-	int flag2 = 0;
-	int flag3 = 0;
-	int flag4 = 0;
-
-	while(flag1){
-        s.channel = s.AIN0;
-		sensorcomm.setSensor("volume");
-		sensorcomm.start(s);
-
-        std::time_t curr_time = system_clock::to_time_t (system_clock::now());
-        if(curr_time - start_time == 5){
-                flag1 = 0;
-				flag2 = 1;
-                printf("volume check finished \n");
-                sensorcomm.stop();
-        } 
-
-    }
-
-	while(flag2){
-        s.channel = s.AIN1;
-		sensorcomm.setSensor("ph");
-		sensorcomm.start(s);
-		
-        std::time_t curr_time = system_clock::to_time_t (system_clock::now());
-        if(curr_time - start_time == 10){
-                flag2 = 0;
-				flag3 = 1;
-                printf("ph check finished \n");
-                sensorcomm.stop();
-        } 
-
-    }
-
-	while(flag3){
-        s.channel = s.AIN2;
-		sensorcomm.setSensor("turbidity");
-		sensorcomm.start(s);
-
-        std::time_t curr_time = system_clock::to_time_t (system_clock::now());
-        if(curr_time - start_time == 15){
-                flag3 = 0;
-				flag4 = 1;
-                printf("turbidity check finished\n");
-                sensorcomm.stop();
-        } 
-
-    }
-
-	while(flag4){
-        s.channel = s.AIN3;
-		sensorcomm.setSensor("temperature");
-		sensorcomm.start(s);
-
-        std::time_t curr_time = system_clock::to_time_t (system_clock::now());
-        if(curr_time - start_time == 20){
-                flag4 = 0;
-				flag1 = 1;
-                printf("temperature check finished \n");
-                sensorcomm.stop();
-
-        } 
-
-    }
 	
 	while (mainRunning) sleep(1);
 		

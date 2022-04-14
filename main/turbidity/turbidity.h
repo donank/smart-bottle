@@ -14,7 +14,7 @@
 class turbidity : public sensor {
 
 public:
-    turbidity(): sensor("turbidity"){
+    turbidity(): sensor("turbidity", 2){
 
     }
     
