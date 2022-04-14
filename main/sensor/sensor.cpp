@@ -6,16 +6,21 @@ std::string sensor::getName(){
     return name_;
 }
 
-void sensor::setData(double data){
-    cb_.put(data);
+void sensor::setData(float data){
+    //cb_.put(data);
+    values.push_back(data);
 }
 
-double sensor::getData(){
-    return cb_.get(); //returns last inserted value from buffer
+std::deque<float> sensor::getData(){
+    return values; //returns last inserted value from buffer
 }
 
 size_t sensor::getSize(){
-    return cb_.size();
+    return values.size();
+}
+
+void sensor::popFront(){
+    values.pop_front();
 }
 
 void sensor::reset(){

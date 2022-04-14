@@ -44,18 +44,17 @@ void setHUPHandler() {
 }
 class ADS1115PrinterVM : public volume {
 public:
-	std::deque<float> volumeValues;
 	const int maxBufSize = 50; 
 
 	virtual void hasSample(float v){
-		volumeValues.push_back(v);
+		setData(v);
 		
-		if (volumeValues.size() > maxBufSize) volumeValues.pop_front();
+		if (getSize() > maxBufSize) popFront();
 	}
 	
 	void forceValue(float a) {
-		
-		for(auto& v:volumeValues) {
+	
+		for(auto& v:getData()) {
 			v = a;
 		}
 	}
@@ -63,18 +62,17 @@ public:
 
 class ADS1115PrinterPH : public ph {
 public:
-	std::deque<float> phValues;
 	const int maxBufSize = 50; 
 
 	virtual void hasSample(float v){
-		phValues.push_back(v);
+		setData(v);
 		
-		if (phValues.size() > maxBufSize) phValues.pop_front();
+		if (getSize() > maxBufSize) popFront();
 	}
 	
 	void forceValue(float a) {
-		
-		for(auto& v:phValues) {
+	
+		for(auto& v:getData()) {
 			v = a;
 		}
 	}
@@ -82,19 +80,17 @@ public:
 
 class ADS1115PrinterTB : public turbidity {
 public:
-	std::deque<float> turbidityValues;
 	const int maxBufSize = 50; 
 
 	virtual void hasSample(float v){
+		setData(v);
 		
-		turbidityValues.push_back(v);
-		
-		if (turbidityValues.size() > maxBufSize) turbidityValues.pop_front();
+		if (getSize() > maxBufSize) popFront();
 	}
 	
 	void forceValue(float a) {
-		
-		for(auto& v:turbidityValues) {
+	
+		for(auto& v:getData()) {
 			v = a;
 		}
 	}
@@ -102,19 +98,17 @@ public:
 
 class ADS1115PrinterTP : public temperature {
 public:
-	std::deque<float> temperatureValues;
 	const int maxBufSize = 50; 
 
 	virtual void hasSample(float v){
+		setData(v);
 		
-		temperatureValues.push_back(v);
-		
-		if (temperatureValues.size() > maxBufSize) temperatureValues.pop_front();
+		if (getSize() > maxBufSize) popFront();
 	}
 	
 	void forceValue(float a) {
-		
-		for(auto& v:temperatureValues) {
+	
+		for(auto& v:getData()) {
 			v = a;
 		}
 	}
@@ -156,10 +150,10 @@ public:
 	virtual std::string getJSONString() {
 		JSONCGIHandler::JSONGenerator jsonGenerator;
 		jsonGenerator.add("epoch",(long)time(NULL));
-		jsonGenerator.add("volumeValues",sensorfastcgivm->volumeValues);
-		jsonGenerator.add("phValues",sensorfastcgiph->phValues);
-		jsonGenerator.add("turbidityValues",sensorfastcgitb->turbidityValues);
-		jsonGenerator.add("temperatureValues",sensorfastcgitp->temperatureValues);
+		jsonGenerator.add("volumeValues",sensorfastcgivm->getData());
+		jsonGenerator.add("phValues",sensorfastcgiph->getData());
+		jsonGenerator.add("turbidityValues",sensorfastcgitb->getData());
+		jsonGenerator.add("temperatureValues",sensorfastcgitp->getData());
 		jsonGenerator.add("fs",(float)(sensorfastcgiph->getADS1115settings().getSamplingRate()));
 		return jsonGenerator.getJSON();
 	}

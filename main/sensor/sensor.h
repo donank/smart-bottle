@@ -9,6 +9,8 @@
 #include "../circularbuffer/circularbuffer.h"
 #include "CppThread.h"
 #include "../ads1115rpi/ads1115rpi.h"
+#include<unistd.h>
+#include <deque>
 
 class CppThreadInterface : public CppThread{
 protected:
@@ -32,8 +34,9 @@ public:
     
     std::string getName();
     ADS1115settings::Input getChannel();
-    void setData(double data);
-    double getData();
+    void setData(float data);
+    std::deque<float> getData();
+    void popFront();
     size_t getSize();
     void reset();
     void startThread();
@@ -46,6 +49,7 @@ private:
    std::string name_;
    ADS1115settings::Input channel_;
    circularbuffer<double> cb_{10};
+   std::deque<float> values;
 };
 
 
