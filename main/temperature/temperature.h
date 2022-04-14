@@ -10,13 +10,23 @@
 class temperature : public sensor {
 
 public:
-    public:
-    temperature(): sensor("temperature", ADS1115settings::AIN3){
+    std::string TYPE[3] = 
+   {
+      "HOT",
+      "COLD",
+      "NORMAL"
+   };
+    temperature(): sensor(ADS1115settings::AIN3){
 
     }
-    
+    void setTemperature(float voltage);
+    float getTemperature();
+    void setType(std::string type);
+    std::string getType();
     void calcThreshold() override;
 private:
+    float temperature_;
+    std::string type_;
 };
 
 

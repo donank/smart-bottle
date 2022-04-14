@@ -9,13 +9,23 @@
 class ph : public sensor {
 
 public:
-    public:
-    ph(): sensor("ph", ADS1115settings::AIN1){
+std::string TYPE[3] = 
+   {
+      "ACID",
+      "BASE",
+      "NEUTRAL"
+   };
+
+    ph(): sensor(ADS1115settings::AIN1){
 
     }
     
+    void setType(std::string type);
+    std::string getType();
     void calcThreshold() override;
+    
 private:
+    std::string type_;
 };
 
 
