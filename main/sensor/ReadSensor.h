@@ -1,10 +1,10 @@
 #ifndef READSENSOR
 #define READSENSOR
 
-#include <csignal>
 #include <iostream>
 #include "Thread.h"
 #include "circularbuffer.h"
+
 
 using namespace std;
 
