@@ -14,7 +14,7 @@
 
 ## Social Media
 Follow us to keep up to date with latest Developents of Osun Smart Water Bottle
-![image](https://user-images.githubusercontent.com/72262907/163587117-b69a49db-eed2-4cab-9d9a-7fc5783e2cb4.png)
+![image](https://user-images.githubusercontent.com/72262907/163587288-b26fc769-4405-4720-bc72-08e5b5eb1be4.png)
 
 
 Winner of RS Grassroots Student Project Fund! https://www.rs-online.com/designspark/the-student-project-fund-2022-winners-announced
