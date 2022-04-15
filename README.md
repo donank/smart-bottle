@@ -15,6 +15,12 @@
 Winner of RS Grassroots Student Project Fund! https://www.rs-online.com/designspark/the-student-project-fund-2022-winners-announced
 # Ọ̀ṣun: A Smart Water Bottle
 
+## Social Media
+<p align="center">
+## Social Media
+</p>
+
+
 It is a known fact that availability of drinkable water is critical to human survival and longevity of life. Earth is abundant in water resources but the availability of drinking water resources is marginal in comparison. The situation seems more grim in the poorer regions of the world, where due to lack of proper infrastructure, standard testing code and compliance, the quality of drinking water that is available to the average citizen is poor. People living in such regions also do not have any proper tools or capability to verify the quality of the drinking water. They have to rely on the local municipal body for such information which can be dated or unreliable.  According to WHO, today, more than 144 million people depend on surface drinking water and around 485,000 people die every year due to illnesses related to contaminated water such as Diarrhoea. In addition, waterborne infections affect around 20-50% of the travellers around the world. Thus aligning with the UN sustainable development goals, there is an urgent need for an affordable smart portable device that caters to the real time testing needs for environments with inadequate drinking water and sanitation facilities. 
 
 Ọ̀ṣun is smart device (bottle) that helps the user decide, in real time, whether the water in the bottle is fit for drinking. The system consists of several electrochemical and optoelectronic sensors interfaced with a Raspberry Pi through an Analog to Digital converter. The designed algorithm collates the sensor data and produces an optimal result based on specified hard-coded strategy. The result is displayed on a 16 X 2 LCD device in a user friendly manner. The module can be interfaced with a smart watch or an android application through bluetooth to track daily water consumption and also display other parameters specifying the drinkability of the water in real time. The data collected by the end-user can be used to form a public spatio-temporal database of the drinking water quality of various regions.
