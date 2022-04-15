@@ -15,9 +15,10 @@
 Winner of RS Grassroots Student Project Fund! https://www.rs-online.com/designspark/the-student-project-fund-2022-winners-announced
 # Ọ̀ṣun: A Smart Water Bottle
 
+<div align="center">
 ## Social Media
 <p align="center">
-## Social Media
+
 </p>
 
 
