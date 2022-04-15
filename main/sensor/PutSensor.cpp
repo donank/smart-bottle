@@ -5,6 +5,7 @@
 using namespace std;
 
 
+// Overloads the worker thread. The purpose of this is to test the functionalities of both thread and circular buffer
 void PutSensor::run()
 {
 	// Running is set to true
@@ -65,6 +66,7 @@ void PutSensor::run()
 
 }
 
+// Stops the funtion
 void PutSensor::stop()
 {
 	    running = 0;
