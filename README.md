@@ -11,7 +11,7 @@
 ![Build Status](https://github.com/donank/smart-bottle/actions/workflows/ci.yml/badge.svg)
   
 </div>
-<div align="center">
+
 ## Social Media
 Follow us to keep up to date with latest Developents of Osun Smart Water Bottle
 ![image](https://user-images.githubusercontent.com/72262907/163587288-b26fc769-4405-4720-bc72-08e5b5eb1be4.png)
