@@ -14,7 +14,7 @@
 
 ## Social Media
 Follow us to keep up to date with latest Developents of Osun Smart Water Bottle
-![image](https://user-images.githubusercontent.com/72262907/163587288-b26fc769-4405-4720-bc72-08e5b5eb1be4.png)
+![image](https://user-images.githubusercontent.com/72262907/163587992-9646e8bb-18ec-4c96-9fdd-95b2b4e5fca6.png)
 
 
 
