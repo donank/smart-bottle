@@ -38,7 +38,7 @@ class work : public PutSensor {
 	}
 };
 
-
+// Test functionality of Thread and Buffer
 void ReadSensor::run()
 {
 	// Running is set to true
