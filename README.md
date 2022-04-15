@@ -42,6 +42,8 @@ Note: Sensor units are composed of pre-filters and amplifiers to attenuate noise
 
 [2] Y.J. Yang, R.C Haught and J.A Goodrich, Real-time contaminant detection and classification in a drinking water pipe using conventional water quality sensors: Techniques and experimental results, in Journal of Environmental Management, 2009
 
+[3] jQuery <--> C++ FastCGI Web API https://github.com/berndporr/json_fastcgi_web_api
+
 ## Sensors to explore
 
 [1] https://phys.org/news/2016-12-world-solid-state-multi-ion-sensor-internet.html
