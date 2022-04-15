@@ -16,11 +16,11 @@
 # Social Media
 Follow us to keep up to date with the latest Developents of Ọ̀ṣun Smart Water Bottle
 
+<p align="center">
+<a href="https://www.instagram.com/oshun_smartbottle/" target="blank"><img align="center" src="https://github.com/donank/smart-bottle/blob/main/IG_logo.png"height="130" width="130" /></a>·
+<a href="https://www.instagram.com/oshun_smartbottle/" target="blank"><img align="center" src="https://github.com/donank/smart-bottle/blob/main/Youtube_logo.png"height="130" width="130" /></a>·
 
-![image](https://user-images.githubusercontent.com/72262907/163588079-bf14181f-f0f4-497b-b4a8-30a9e3584358.png)
-![image](https://user-images.githubusercontent.com/72262907/163588532-566b37df-01c2-42db-8fb3-998152b03c09.png)
 
-  
 Winner of RS Grassroots Student Project Fund! https://www.rs-online.com/designspark/the-student-project-fund-2022-winners-announced
 # Ọ̀ṣun: A Smart Water Bottle
 
