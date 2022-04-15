@@ -1,7 +1,6 @@
 #ifndef PutSensor_h
 #define PutSensor_h
 
-#include <csignal>
 #include <iostream>
 #include "Thread.h"
 #include "circularbuffer.h"
