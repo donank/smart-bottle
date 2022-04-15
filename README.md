@@ -12,12 +12,15 @@
   
 </div>
 
-## Social Media
-Follow us to keep up to date with latest Developents of Osun Smart Water Bottle
-![image](https://user-images.githubusercontent.com/72262907/163587992-9646e8bb-18ec-4c96-9fdd-95b2b4e5fca6.png)
+
+# Social Media
+Follow us to keep up to date with the latest Developents of Ọ̀ṣun Smart Water Bottle
 
 
+![image](https://user-images.githubusercontent.com/72262907/163588079-bf14181f-f0f4-497b-b4a8-30a9e3584358.png)
+![image](https://user-images.githubusercontent.com/72262907/163588532-566b37df-01c2-42db-8fb3-998152b03c09.png)
 
+  
 Winner of RS Grassroots Student Project Fund! https://www.rs-online.com/designspark/the-student-project-fund-2022-winners-announced
 # Ọ̀ṣun: A Smart Water Bottle
 
