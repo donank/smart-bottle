@@ -7,27 +7,47 @@
  */
 #include <assert.h>
 #include "../circularbuffer/circularbuffer.h"
+#include "CppThread.h"
+#include "../ads1115rpi/ads1115rpi.h"
+#include<unistd.h>
+#include <deque>
+
+class CppThreadInterface : public CppThread{
+protected:
+    virtual void threadRun() = 0;
+    void run() override
+    {
+        threadRun();
+    }
+};
 
 /**
  * Parent sensor class
  **/
-class sensor {
+class sensor: public ADS1115rpi, CppThreadInterface {
 
 public:
-    sensor(const std::string& name){
-        sensorName = name;
+    sensor(ADS1115settings::Input channel){
+        channel_ = channel;
     }
     
     std::string getName();
-    void setData(double data);
-    double getData();
+    ADS1115settings::Input getChannel();
+    void setData(float data);
+    std::deque<float> getData();
+    void popFront();
     size_t getSize();
     void reset();
+    void startThread();
     virtual void calcThreshold() = 0;
 
 private:
-   std::string sensorName;
+	void threadRun();
+
+private:
+   ADS1115settings::Input channel_;
    circularbuffer<double> cb_{10};
+   std::deque<float> values;
 };
 
 

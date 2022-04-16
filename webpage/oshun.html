@@ -42,12 +42,13 @@
 	<h1>Oshun Smart Bottle</h1>
 	<h2>Oshun smart water bottle's, water quality results</h2>
 	<h3>fs = <span id="fs">00</span> Hz</h3>
+	<h3>Drinkable = <span id="drinkable">NA</span></h3>
 	<table>
 		<tr>
 			<th>
 				<p> Water Sensor</p>
 				<div id="div_g" style="width:400px; height:300px;"></div>
-
+				<h3>Detected? = <span id="detected">NA</span></h3>
 				<script type="text/javascript">
 					// max samples for dygraph
 					var maxSamples = 60;
@@ -83,6 +84,8 @@
 								var dt = 1.0 / result.fs;
 								var t = 0;
 								document.getElementById("fs").innerHTML = result.fs;
+								document.getElementById("drinkable").innerHTML = result.drinkable;
+								document.getElementById("detected").innerHTML = result.waterDetected;
 								for (let i = 0; i < result.volumeValues.length; i++) {
 									var y = result.volumeValues[i];
 									data.push([t, y]);
@@ -97,6 +100,7 @@
 			<th>
 				<p> pH sensor </p>
 				<div id="div_h" style="width:400px; height:300px;"></div>
+				<h3>PH Type = <span id="phType">NA</span></h3>
 
 				<script type="text/javascript">
 					// max samples for dygraph
@@ -120,6 +124,8 @@
 								data = [];
 								var dt = 1.0 / result.fs;
 								var t = 0;
+								document.getElementById("drinkable").innerHTML = result.drinkable;
+								document.getElementById("phType").innerHTML = result.phType;
 								for (let i = 0; i < result.phValues.length; i++) {
 									var y = result.phValues[i];
 									data.push([t, y]);
@@ -136,7 +142,7 @@
 			<th>
 				<p> Turbidity Sensor </p>
 				<div id="div_p" style="width:400px; height:300px;"></div>
-
+				<h3>Turbidity Type = <span id="tbType">NA</span></h3>
 				<script type="text/javascript">
 					// max samples for dygraph
 					var maxSamples = 60;
@@ -159,6 +165,8 @@
 								data = [];
 								var dt = 1.0 / result.fs;
 								var t = 0;
+								document.getElementById("drinkable").innerHTML = result.drinkable;
+								document.getElementById("tbType").innerHTML = result.turbidityType;
 								for (let i = 0; i < result.turbidityValues.length; i++) {
 									var y = result.turbidityValues[i];
 									data.push([t, y]);
@@ -173,6 +181,7 @@
 			<th>
 				<p> Temperature sensor </p>
 				<div id="div_ph" style="width:400px; height:300px;"></div>
+				<h3>Temperature Type = <span id="tpType">NA</span></h3>
 
 				<script type="text/javascript">
 					// max samples for dygraph
@@ -196,6 +205,9 @@
 								data = [];
 								var dt = 1.0 / result.fs;
 								var t = 0;
+								document.getElementById("drinkable").innerHTML = result.drinkable;
+								document.getElementById("tpType").innerHTML = result.temperatureType;
+
 								for (let i = 0; i < result.temperatureValues.length; i++) {
 									var y = result.temperatureValues[i];
 									data.push([t, y]);
