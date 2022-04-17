@@ -19,6 +19,9 @@
 			padding: 15px 15px 15px 15px;
 			color: #355681;
 		}
+		.circle-progress {
+			width: 200px; height: auto;
+		}
 
 		.circle-progress-value {
 			stroke-width: 6px;
@@ -48,26 +51,56 @@
 
 <body>
 	<center>
-	<h1>Oshun Smart Bottle</h1>
-	<h2>Oshun smart water bottle's water quality results</h2>
-	<h3>Sampling Frequency <span id="fs">00</span> Hz</h3>
+		<h1>Oshun Smart Bottle</h1>
+		<h2>Oshun smart water bottle's water quality results</h2>
+		<h3>Sampling Frequency <span id="fs">00</span> Hz</h3>
 
-	<div class="progressContainer">
-		<div class="progress" id="progV" >
+		<div class="progressContainer">
+			<div class="progVContainer" style="display: flex;flex-direction: row; justify-content: center;row-gap: 30px;">
+				<div class="progress" id="progV" style = " flex-grow: 2; ">
+				</div>
+				<div style="display: flex;flex-direction: column;align-items: center;flex-grow: 2;">
+					<h3><span id="d" >Detecting Water Sample...</span></h3>
+					<h3><span id="detected"></span></h3>
+				</div>
+			</div>
+			<div class="progressContainer">
+				<div class="progVContainer" style="display: flex;flex-direction: row; justify-content: center;row-gap: 30px;">
+					<div class="progress" id="progPH" style = " flex-grow: 2; ">
+					</div>
+					<div style="display: flex;flex-direction: column;align-items: center;flex-grow: 2;">
+						<h3><span id="detectedPHLabel"></span></h3>
+						<h3><span id="finalPH"></span></h3>
+					</div>
+				</div>
+				<div class="progressContainer">
+					<div class="progVContainer" style="display: flex;flex-direction: row; justify-content: center;row-gap: 30px;">
+						<div class="progress" id="progTB" style = " flex-grow: 2; ">
+						</div>
+						<div style="display: flex;flex-direction: column;align-items: center;flex-grow: 2;">
+							<h3><span id="detectedTBLabel" ></span></h3>
+							<h3><span id="finalB"></span></h3>
+						</div>
+					</div>
+					<div class="progressContainer">
+						<div class="progVContainer" style="display: flex;flex-direction: row; justify-content: center;row-gap: 30px;">
+							<div class="progress" id="progTP" style = " flex-grow: 2; ">
+							</div>
+							<div style="display: flex;flex-direction: column;align-items: center;flex-grow: 2;">
+								<h3><span id="detectedTPLabel" ></span></h3>
+								<h3><span id="finalTP"></span></h3>
+							</div>
+						</div>
 		</div>
-		<div class="progress" id="progPH" ></div>
-		<div class="progress" id="progTB" ></div>
-		<div class="progress" id="progTP" ></div>
-	</div>
-	<h3>Drinkable = <span id="drinkable">NA</span></h3>
+		<h3>Drinkable = <span id="drinkable">NA</span></h3>
 
-</center>
+	</center>
 
 	<table style="display: none;">
 		<tr>
 			<th>
 				<div id="div_g" style="width:0px; height:0px;display: none;"></div>
-				
+
 				<script type="text/javascript">
 
 					// max samples for dygraph
@@ -94,19 +127,22 @@
 								var tp = 0;
 								$('#progV').show();
 								document.getElementById("fs").innerHTML = result.fs;
-								document.getElementById("drinkable").innerHTML = result.drinkable;
-								//document.getElementById("detected").innerHTML = result.waterDetected;
+								//document.getElementById("drinkable").innerHTML = result.drinkable;
+								if (result.waterDetected == 0) {
+									document.getElementById("detected").innerHTML = "Water detected! Commencing Testing.";
+								}
+
 								for (let i = 0; i < result.volumeValues.length; i++) {
 									var y = result.volumeValues[i];
 									data.push([t, y]);
 									t = t + dt;
-									tp = tp+ 1;
+									tp = tp + 1;
 								}
 								$('#progV').circleProgress({
-										max: 29,
-										value: tp,
-										textFormat: 'percent',
-									});
+									max: 29,
+									value: tp,
+									textFormat: 'percent',
+								});
 								document.getElementById("fs").innerHTML = tp;
 
 								g.updateOptions({ 'file': data });
@@ -141,19 +177,23 @@
 								var t = 0;
 								var tp = 0;
 								$('#progPH').show();
-								document.getElementById("drinkable").innerHTML = result.drinkable;
-								//document.getElementById("phType").innerHTML = result.phType;
+								//document.getElementById("drinkable").innerHTML = result.drinkable;
+								
 								for (let i = 0; i < result.phValues.length; i++) {
 									var y = result.phValues[i];
 									data.push([t, y]);
 									t = t + dt;
-									tp = tp+ 1;
+									tp = tp + 1;
+								}
+								if(tp >1){
+									document.getElementById("detectedPHLabel").innerHTML = "Evaluating pH...";
+
 								}
 								$('#progPH').circleProgress({
-										max: 29,
-										value: tp,
-										textFormat: 'percent',
-									});
+									max: 29,
+									value: tp,
+									textFormat: 'percent',
+								});
 								g.updateOptions({ 'file': data });
 							});
 						}, 1000);
@@ -178,7 +218,7 @@
 							{
 								labels: ['Time', 'Turbidity'],
 							});
-							$('#progTB').show();
+						$('#progTB').show();
 						window.intervalId = setInterval(function () {
 							// callback for interval timer for every second
 							$.getJSON(serverPath, function (result) {
@@ -186,19 +226,19 @@
 								var dt = 1.0 / result.fs;
 								var t = 0;
 								var tp = 0;
-								document.getElementById("drinkable").innerHTML = result.drinkable;
-								//document.getElementById("tbType").innerHTML = result.turbidityType;
+								//document.getElementById("drinkable").innerHTML = result.drinkable;
+								document.getElementById("detectedTBLabel").innerHTML = "Evaluating Turbidity...";
 								for (let i = 0; i < result.turbidityValues.length; i++) {
 									var y = result.turbidityValues[i];
 									data.push([t, y]);
 									t = t + dt;
-									tp = tp+1;
+									tp = tp + 1;
 								}
 								$('#progTB').circleProgress({
-										max: 29,
-										value: tp,
-										textFormat: 'percent',
-									});
+									max: 29,
+									value: tp,
+									textFormat: 'percent',
+								});
 								g.updateOptions({ 'file': data });
 							});
 						}, 1000);
@@ -230,20 +270,20 @@
 								var dt = 1.0 / result.fs;
 								var t = 0;
 								var tp = 0;
-								document.getElementById("drinkable").innerHTML = result.drinkable;
-								//document.getElementById("tpType").innerHTML = result.temperatureType;
+								//document.getElementById("drinkable").innerHTML = result.drinkable;
+								document.getElementById("detectedTPLabel").innerHTML = "Evaluating Temperature...";
 								$('#progTP').show();
 								for (let i = 0; i < result.temperatureValues.length; i++) {
 									var y = result.temperatureValues[i];
 									data.push([t, y]);
 									t = t + dt;
-									tp = tp+1;
+									tp = tp + 1;
 								}
 								$('#progTP').circleProgress({
-										max: 29,
-										value: tp,
-										textFormat: 'percent',
-									});
+									max: 29,
+									value: tp,
+									textFormat: 'percent',
+								});
 								g.updateOptions({ 'file': data });
 							});
 						}, 1000);
