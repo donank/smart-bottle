@@ -5,10 +5,11 @@ bool volume::waterDetected(){
 }
 
 void volume::calcThreshold(){
-    float latestValue = getData().front();
-    if(latestValue > 0.4){
+for(auto& v:getData()) {
+        if(v > 0.4){
         waterDetected_ = true;
-    }else if(latestValue < 0.3){
+    }else if(v < 0.3){
         waterDetected_ = false;
     }
+}
 }
