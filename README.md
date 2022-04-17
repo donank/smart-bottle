@@ -17,8 +17,8 @@
 Follow us to keep up to date with the latest Developents of Ọ̀ṣun Smart Water Bottle
 
 <p align="center">
-<a href="https://www.instagram.com/oshun_smartbottle/" target="blank"><img align="center" src="https://github.com/donank/smart-bottle/blob/main/IG_logo.png"height="130" width="130" /></a>·
-<a href="https://www.instagram.com/oshun_smartbottle/" target="blank"><img align="center" src="https://github.com/donank/smart-bottle/blob/main/Youtube_logo.png"height="130" width="130" /></a>·
+<a href="https://www.instagram.com/oshun_smartbottle/" target="blank"><img align="center" src="https://github.com/donank/smart-bottle/blob/main/IG_logo.png"height="130" width="130" /></a>
+<a href="https://www.instagram.com/oshun_smartbottle/" target="blank"><img align="center" src="https://github.com/donank/smart-bottle/blob/main/Youtube_logo.png"height="130" width="130" /></a>
 
 
 Winner of RS Grassroots Student Project Fund! https://www.rs-online.com/designspark/the-student-project-fund-2022-winners-announced
