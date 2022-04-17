@@ -2,25 +2,96 @@
 <html>
 
 <head>
-	<title>Oshun</title>
+	<title>Oshun-Analysis</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<style>
 		body {
-			font-family: Tahoma, Verdana, Arial, sans-serif;
 
+			font-family: "Lato", sans-serif;
+			background-color: #F8F8FF;
 		}
 
 		h1 {
-			width: 1190px;
-			height: 70px;
-			font-weight: 600;
 			font-family: 'Titillium Web', sans-serif;
 			font-size: 36px;
-			line-height: 40px;
-			padding: 15px 15px 15px 15px;
-			color: #355681;
+			color: #082081
 		}
+
+		.sidebar {
+			height: 100%;
+			width: 0;
+			position: fixed;
+			z-index: 1;
+			top: 0;
+			left: 0;
+			background-color: #111;
+			overflow-x: hidden;
+			transition: 0.5s;
+			padding-top: 60px;
+		}
+
+		.sidebar a {
+			padding: 8px 8px 8px 32px;
+			text-decoration: none;
+			font-size: 25px;
+			color: #818181;
+			display: block;
+			transition: 0.3s;
+		}
+
+		.sidebar a:hover {
+			color: #f1f1f1;
+		}
+
+		.sidebar .closebtn {
+			position: absolute;
+			top: 0;
+			right: 25px;
+			font-size: 36px;
+			margin-left: 50px;
+		}
+
+		.openbtn {
+			width: 100%;
+			font-size: 20px;
+			cursor: pointer;
+			color: black;
+			padding: 14px 15px;
+			border: none;
+			text-align: left;
+		}
+
+		#main {
+			transition: margin-left .5s;
+			padding: 16px;
+		}
+
+		@media screen and (max-height: 450px) {
+			.sidebar {
+				padding-top: 15px;
+			}
+
+			.sidebar a {
+				font-size: 18px;
+			}
+		}
+
+		.progressContainer {
+			margin-top: 10px;
+			display: grid;
+			grid-template-rows: auto auto auto auto;
+			grid-row-gap: 50px;
+			align-content: start;
+		}
+
+		.progContainer {
+			background-color: #082081;
+		}
+
 		.circle-progress {
-			width: 200px; height: auto;
+			width: 200px;
+			height: auto;
 		}
 
 		.circle-progress-value {
@@ -36,12 +107,6 @@
 		.circle-progress-text {
 			fill: hsl(39, 100%, 50%);
 		}
-
-		.progressContainer {
-			display: flex;
-			/* or inline-flex */
-			flex-direction: column;
-		}
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="jquery.circle-progress.min.js"></script>
@@ -50,52 +115,69 @@
 </head>
 
 <body>
-	<center>
-		<h1>Oshun Smart Bottle</h1>
-		<h2>Oshun smart water bottle's water quality results</h2>
-		<h3>Sampling Frequency <span id="fs">00</span> Hz</h3>
+		<div id="mySidebar" class="sidebar">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">x</a>
+			<a href="#">About</a>
+			<a href="#">Services</a>
+			<a href="#">Clients</a>
+			<a href="#">Contact</a>
+		</div>
 
-		<div class="progressContainer">
-			<div class="progVContainer" style="display: flex;flex-direction: row; justify-content: center;row-gap: 30px;">
-				<div class="progress" id="progV" style = " flex-grow: 2; ">
-				</div>
-				<div style="display: flex;flex-direction: column;align-items: center;flex-grow: 2;">
-					<h3><span id="d" >Detecting Water Sample...</span></h3>
-					<h3><span id="detected"></span></h3>
-				</div>
-			</div>
+		<div id="main">
+			<button class="openbtn" onclick="openNav()">&#9776; Analysis</button>
 			<div class="progressContainer">
-				<div class="progVContainer" style="display: flex;flex-direction: row; justify-content: center;row-gap: 30px;">
-					<div class="progress" id="progPH" style = " flex-grow: 2; ">
+				<div class="progContainer"
+					style="display: grid;grid-template-columns: auto auto; align-content: center;border-style: solid;border:#355681;">
+					<div class="progress" id="progV" style=" flex-grow: 2; ">
+					</div>
+					<div style="display: grid;grid-template-rows: auto auto;">
+						<h3><span id="detectedLabel">Detecting Water Sample...</span></h3>
+						<h3><span id="detected"></span></h3>
+					</div>
+				</div>
+				<div class="progContainer"
+					style="display: flex;flex-direction: row; justify-content: center;row-gap: 30px;">
+					<div class="progress" id="progPH" style=" flex-grow: 2; ">
 					</div>
 					<div style="display: flex;flex-direction: column;align-items: center;flex-grow: 2;">
 						<h3><span id="detectedPHLabel"></span></h3>
 						<h3><span id="finalPH"></span></h3>
 					</div>
 				</div>
-				<div class="progressContainer">
-					<div class="progVContainer" style="display: flex;flex-direction: row; justify-content: center;row-gap: 30px;">
-						<div class="progress" id="progTB" style = " flex-grow: 2; ">
-						</div>
-						<div style="display: flex;flex-direction: column;align-items: center;flex-grow: 2;">
-							<h3><span id="detectedTBLabel" ></span></h3>
-							<h3><span id="finalB"></span></h3>
-						</div>
+				<div class="progContainer"
+					style="display: flex;flex-direction: row; justify-content: center;row-gap: 30px;">
+					<div class="progress" id="progTB" style=" flex-grow: 2; ">
 					</div>
-					<div class="progressContainer">
-						<div class="progVContainer" style="display: flex;flex-direction: row; justify-content: center;row-gap: 30px;">
-							<div class="progress" id="progTP" style = " flex-grow: 2; ">
-							</div>
-							<div style="display: flex;flex-direction: column;align-items: center;flex-grow: 2;">
-								<h3><span id="detectedTPLabel" ></span></h3>
-								<h3><span id="finalTP"></span></h3>
-							</div>
-						</div>
+					<div style="display: flex;flex-direction: column;align-items: center;flex-grow: 2;">
+						<h3><span id="detectedTBLabel"></span></h3>
+						<h3><span id="finalB"></span></h3>
+					</div>
+				</div>
+				<div class="progContainer"
+					style="display: flex;flex-direction: row; justify-content: center;row-gap: 30px;">
+					<div class="progress" id="progTP" style=" flex-grow: 2; ">
+					</div>
+					<div style="display: flex;flex-direction: column;align-items: center;flex-grow: 2;">
+						<h3><span id="detectedTPLabel"></span></h3>
+						<h3><span id="finalTP"></span></h3>
+					</div>
+				</div>
+			</div>
 		</div>
-		<h3>Drinkable = <span id="drinkable">NA</span></h3>
 
-	</center>
+		
+	</div>
+	<script>
+		function openNav() {
+			document.getElementById("mySidebar").style.width = "250px";
+			document.getElementById("main").style.marginLeft = "250px";
+		}
 
+		function closeNav() {
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft = "0";
+		}
+	</script>
 	<table style="display: none;">
 		<tr>
 			<th>
@@ -126,10 +208,10 @@
 								var t = 0;
 								var tp = 0;
 								$('#progV').show();
-								document.getElementById("fs").innerHTML = result.fs;
+								//document.getElementById("fs").innerHTML = result.fs;
 								//document.getElementById("drinkable").innerHTML = result.drinkable;
 								if (result.waterDetected == 0) {
-									document.getElementById("detected").innerHTML = "Water detected! Commencing Testing.";
+									//document.getElementById("detected").innerHTML = "Water detected! Commencing Testing.";
 								}
 
 								for (let i = 0; i < result.volumeValues.length; i++) {
@@ -178,14 +260,14 @@
 								var tp = 0;
 								$('#progPH').show();
 								//document.getElementById("drinkable").innerHTML = result.drinkable;
-								
+
 								for (let i = 0; i < result.phValues.length; i++) {
 									var y = result.phValues[i];
 									data.push([t, y]);
 									t = t + dt;
 									tp = tp + 1;
 								}
-								if(tp >1){
+								if (tp > 1) {
 									document.getElementById("detectedPHLabel").innerHTML = "Evaluating pH...";
 
 								}
@@ -293,8 +375,6 @@
 			</th>
 		</tr>
 	</table>
-
-
 </body>
 
 </html>
