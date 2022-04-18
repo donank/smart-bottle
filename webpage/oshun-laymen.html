@@ -81,31 +81,59 @@
 			margin-top: 10px;
 			display: grid;
 			grid-template-rows: auto auto auto auto;
-			grid-row-gap: 50px;
+			grid-row-gap: 10px;
 			align-content: start;
+
 		}
 
 		.progContainer {
-			background-color: #082081;
+			height: 160px;
+			color: white;
+			background-color: #393456;
+			border-radius: 6px;
+			display: grid;
+			grid-template-columns: 160px auto;
+			align-content: center;
+		}
+
+		.progValContainer {
+			position: relative;
+
+			padding: 0;
+		}
+
+		.progVal {
+			position: absolute;
+			top: 50%;  /* position the top  edge of the element at the middle of the parent */
+    left: 50%; /* position the left edge of the element at the middle of the parent */
+
+    transform: translate(-50%, -50%); 
+			display: flex;
+			flex-direction: row;
+			gap: 10px;
+		}
+
+		.progress {
+			margin-left: 10px;
 		}
 
 		.circle-progress {
-			width: 200px;
+			width: 120px;
 			height: auto;
 		}
 
 		.circle-progress-value {
-			stroke-width: 6px;
-			stroke: hsl(39, 100%, 50%);
+			stroke-width: 10px;
+			stroke: white;
 		}
 
 		.circle-progress-circle {
-			stroke-width: 6px;
-			stroke: hsl(39, 100%, 85%);
+			stroke-width: 10px;
+			stroke: white;
 		}
 
 		.circle-progress-text {
-			fill: hsl(39, 100%, 50%);
+			fill: white;
 		}
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -115,57 +143,58 @@
 </head>
 
 <body>
-		<div id="mySidebar" class="sidebar">
-			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">x</a>
-			<a href="#">About</a>
-			<a href="#">Services</a>
-			<a href="#">Clients</a>
-			<a href="#">Contact</a>
-		</div>
+	<div id="mySidebar" class="sidebar">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">x</a>
+		<a href="https://github.com/donank/smart-bottle">About</a>
+		<a href="http://192.168.1.21/oshun.html">Debug</a>
+		<a href="#">Contact</a>
+	</div>
 
-		<div id="main">
-			<button class="openbtn" onclick="openNav()">&#9776; Analysis</button>
-			<div class="progressContainer">
-				<div class="progContainer"
-					style="display: grid;grid-template-columns: auto auto; align-content: center;border-style: solid;border:#355681;">
-					<div class="progress" id="progV" style=" flex-grow: 2; ">
-					</div>
-					<div style="display: grid;grid-template-rows: auto auto;">
-						<h3><span id="detectedLabel">Detecting Water Sample...</span></h3>
-						<h3><span id="detected"></span></h3>
-					</div>
+	<div id="main">
+		<button class="openbtn" onclick="openNav()">&#9776; Analysis</button>
+		<div class="progressContainer">
+			<div class="progContainer">
+				<div class="progress" id="progV">
 				</div>
-				<div class="progContainer"
-					style="display: flex;flex-direction: row; justify-content: center;row-gap: 30px;">
-					<div class="progress" id="progPH" style=" flex-grow: 2; ">
-					</div>
-					<div style="display: flex;flex-direction: column;align-items: center;flex-grow: 2;">
-						<h3><span id="detectedPHLabel"></span></h3>
-						<h3><span id="finalPH"></span></h3>
-					</div>
+				<div class="progVal1" style="justify-content: center; justify-items: center;">
+					<h3><span id="detectedLabel">Detecting Water</span></h3>
 				</div>
-				<div class="progContainer"
-					style="display: flex;flex-direction: row; justify-content: center;row-gap: 30px;">
-					<div class="progress" id="progTB" style=" flex-grow: 2; ">
-					</div>
-					<div style="display: flex;flex-direction: column;align-items: center;flex-grow: 2;">
-						<h3><span id="detectedTBLabel"></span></h3>
-						<h3><span id="finalB"></span></h3>
-					</div>
+			</div>
+			<div class="progContainer">
+				<div class="progress" id="progPH">
 				</div>
-				<div class="progContainer"
-					style="display: flex;flex-direction: row; justify-content: center;row-gap: 30px;">
-					<div class="progress" id="progTP" style=" flex-grow: 2; ">
-					</div>
-					<div style="display: flex;flex-direction: column;align-items: center;flex-grow: 2;">
-						<h3><span id="detectedTPLabel"></span></h3>
-						<h3><span id="finalTP"></span></h3>
+				<div class="progValContainer">
+					<svg style="position:absolute;top:0;right:10;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32px"
+						height="32px">
+						<path fill="white"
+							d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z" />
+					</svg>
+					<div class="progVal">
+						<h3><span id="finalPH">0.00</span></h3>
+						<h3><span id="detectedPHLabel">pH</span></h3>
 					</div>
 				</div>
 			</div>
+			<div class="progContainer">
+				<div class="progress" id="progTB">
+				</div>
+				<div class="progVal">
+					<h3><span id="finalTB">0.00</span></h3>
+					<h3><span id="detectedTBLabel">NTU</span></h3>
+				</div>
+			</div>
+			<div class="progContainer">
+				<div class="progress" id="progTP">
+				</div>
+				<div class="progVal">
+					<h3><span id="finalTP"></span></h3>
+					<h3><span id="detectedTPLabel">&#8451;</span></h3>
+				</div>
+			</div>
 		</div>
+	</div>
 
-		
+
 	</div>
 	<script>
 		function openNav() {
@@ -184,7 +213,11 @@
 				<div id="div_g" style="width:0px; height:0px;display: none;"></div>
 
 				<script type="text/javascript">
-
+					$('.progress').circleProgress({
+						max: 29,
+						value: 0,
+						textFormat: 'percent',
+					});
 					// max samples for dygraph
 					var maxSamples = 60;
 
@@ -207,7 +240,7 @@
 								var dt = 1.0 / result.fs;
 								var t = 0;
 								var tp = 0;
-								$('#progV').show();
+
 								//document.getElementById("fs").innerHTML = result.fs;
 								//document.getElementById("drinkable").innerHTML = result.drinkable;
 								if (result.waterDetected == 0) {
@@ -258,7 +291,6 @@
 								var dt = 1.0 / result.fs;
 								var t = 0;
 								var tp = 0;
-								$('#progPH').show();
 								//document.getElementById("drinkable").innerHTML = result.drinkable;
 
 								for (let i = 0; i < result.phValues.length; i++) {
@@ -266,9 +298,10 @@
 									data.push([t, y]);
 									t = t + dt;
 									tp = tp + 1;
+									document.getElementById("finalPH").innerHTML = y.toFixed(3);
 								}
 								if (tp > 1) {
-									document.getElementById("detectedPHLabel").innerHTML = "Evaluating pH...";
+
 
 								}
 								$('#progPH').circleProgress({
@@ -300,7 +333,6 @@
 							{
 								labels: ['Time', 'Turbidity'],
 							});
-						$('#progTB').show();
 						window.intervalId = setInterval(function () {
 							// callback for interval timer for every second
 							$.getJSON(serverPath, function (result) {
@@ -309,12 +341,13 @@
 								var t = 0;
 								var tp = 0;
 								//document.getElementById("drinkable").innerHTML = result.drinkable;
-								document.getElementById("detectedTBLabel").innerHTML = "Evaluating Turbidity...";
+								//document.getElementById("detectedTBLabel").innerHTML = "Evaluating Turbidity...";
 								for (let i = 0; i < result.turbidityValues.length; i++) {
 									var y = result.turbidityValues[i];
 									data.push([t, y]);
 									t = t + dt;
 									tp = tp + 1;
+									document.getElementById("finalTB").innerHTML = y.toFixed(3);
 								}
 								$('#progTB').circleProgress({
 									max: 29,
@@ -353,13 +386,13 @@
 								var t = 0;
 								var tp = 0;
 								//document.getElementById("drinkable").innerHTML = result.drinkable;
-								document.getElementById("detectedTPLabel").innerHTML = "Evaluating Temperature...";
-								$('#progTP').show();
+								//document.getElementById("detectedTPLabel").innerHTML = "Evaluating Temperature...";
 								for (let i = 0; i < result.temperatureValues.length; i++) {
 									var y = result.temperatureValues[i];
 									data.push([t, y]);
 									t = t + dt;
 									tp = tp + 1;
+									document.getElementById("finalTP").innerHTML = y.toFixed(3);
 								}
 								$('#progTP').circleProgress({
 									max: 29,
