@@ -104,13 +104,19 @@
 
 		.progVal {
 			position: absolute;
-			top: 50%;  /* position the top  edge of the element at the middle of the parent */
-    left: 50%; /* position the left edge of the element at the middle of the parent */
-
-    transform: translate(-50%, -50%); 
+			top: 50%;
+			left: 30%;
+			transform: translate(-50%, -50%);
 			display: flex;
 			flex-direction: row;
 			gap: 10px;
+		}
+
+		.progVal1 {
+			position: absolute;
+			top: 50%;
+			left: 35%;
+			transform: translate(-50%, -50%);
 		}
 
 		.progress {
@@ -156,16 +162,23 @@
 			<div class="progContainer">
 				<div class="progress" id="progV">
 				</div>
-				<div class="progVal1" style="justify-content: center; justify-items: center;">
-					<h3><span id="detectedLabel">Detecting Water</span></h3>
+				<div class="progValContainer">
+					<svg style="position:absolute;top:-5;right:10;" xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 448 512" width="32px" height="32px">
+						<path fill="white"
+							d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z" />
+					</svg>
+					<div class="progVal1">
+						<h3><span id="detectedVLabel">Detecting Water Solution</span></h3>
+					</div>
 				</div>
 			</div>
 			<div class="progContainer">
 				<div class="progress" id="progPH">
 				</div>
 				<div class="progValContainer">
-					<svg style="position:absolute;top:0;right:10;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32px"
-						height="32px">
+					<svg style="position:absolute;top:-5;right:10;" xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 448 512" width="32px" height="32px">
 						<path fill="white"
 							d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z" />
 					</svg>
@@ -178,17 +191,31 @@
 			<div class="progContainer">
 				<div class="progress" id="progTB">
 				</div>
-				<div class="progVal">
-					<h3><span id="finalTB">0.00</span></h3>
-					<h3><span id="detectedTBLabel">NTU</span></h3>
+				<div class="progValContainer">
+					<svg style="position:absolute;top:-5;right:10;" xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 448 512" width="32px" height="32px">
+						<path fill="white"
+							d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z" />
+					</svg>
+					<div class="progVal">
+						<h3><span id="finalTB">0.00</span></h3>
+						<h3><span id="detectedTBLabel">NTU</span></h3>
+					</div>
 				</div>
 			</div>
 			<div class="progContainer">
 				<div class="progress" id="progTP">
 				</div>
-				<div class="progVal">
-					<h3><span id="finalTP"></span></h3>
-					<h3><span id="detectedTPLabel">&#8451;</span></h3>
+				<div class="progValContainer">
+					<svg style="position:absolute;top:-5;right:10;" xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 448 512" width="32px" height="32px">
+						<path fill="white"
+							d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z" />
+					</svg>
+					<div class="progVal">
+						<h3><span id="finalTP">0.00</span></h3>
+						<h3><span id="detectedTPLabel">&#8451;</span></h3>
+					</div>
 				</div>
 			</div>
 		</div>
