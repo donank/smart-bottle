@@ -3,10 +3,22 @@
 
 <head>
 	<title>Oshun-Analysis</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+	<meta name="viewport" http-equiv="X-UA-Compatible" content="width=device-width, initial-scale=1">
+
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/style.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.css" />
+
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+	<script src="jquery.circle-progress.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js"></script>
+
 	<style>
 		body {
+			position: relative;
 
 			font-family: "Lato", sans-serif;
 			background-color: #F8F8FF;
@@ -25,7 +37,8 @@
 			z-index: 1;
 			top: 0;
 			left: 0;
-			background-color: #111;
+			background-color: #393456;
+			color: white;
 			overflow-x: hidden;
 			transition: 0.5s;
 			padding-top: 60px;
@@ -35,7 +48,7 @@
 			padding: 8px 8px 8px 32px;
 			text-decoration: none;
 			font-size: 25px;
-			color: #818181;
+			color: white;
 			display: block;
 			transition: 0.3s;
 		}
@@ -98,7 +111,6 @@
 
 		.progValContainer {
 			position: relative;
-
 			padding: 0;
 		}
 
@@ -135,17 +147,76 @@
 
 		.circle-progress-circle {
 			stroke-width: 10px;
-			stroke: white;
+			stroke: grey;
 		}
 
 		.circle-progress-text {
 			fill: white;
 		}
+
+		.fadeInSuitable {
+			width: 350px;
+			background-color: white;
+			color: black;
+			display: none;
+			position: absolute;
+			top: 40%;
+			left: 2.5%;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+			border-radius: 6px;
+
+		}
+
+		.fadeInContent {
+			display: grid;
+			background-color: white;
+			width: 100%;
+			height: 100%;
+			border-radius: 6px;
+
+		}
+
+		.fadeInContentDetail {
+			grid-area: 1 / 1;
+			width: 100%;
+			height: 100%;
+			z-index: 10;
+			border-radius: 6px;
+			position: relative;
+		}
+
+		.wave-container {
+			grid-area: 1 / 1;
+			width: 100%;
+			height: 100%;
+			display: grid;
+			grid-template-rows: auto auto;
+			border-radius: 6px;
+		}
+
+
+		.fadeInNotSuitable {
+			width: 350px;
+			background-color: white;
+			color: black;
+			display: none;
+			position: absolute;
+			top: 40%;
+			left: 2.5%;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+		}
+
+		.buttonReport {
+			background-color: white;
+			color: black;
+			border: 2px solid #f44336;
+		}
+
+		.buttonReport:hover {
+			background-color: #f44336;
+			color: white;
+		}
 	</style>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="jquery.circle-progress.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js"></script>
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.css" />
 </head>
 
 <body>
@@ -219,9 +290,83 @@
 				</div>
 			</div>
 		</div>
+
 	</div>
 
+	<div class="fadeInSuitable" id="suitable">
+		<div class="fadeInContent">
+			<div class="fadeInContentDetail">
+				<svg class="svg-icon"
+					style="position:absolute;top:-0.5;right:55.5%;width: 8.5em; height: 8.5em;vertical-align: middle;fill: currentColor;overflow: hidden;"
+					viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+					<path
+						d="M512 512m-400.695652 0a400.695652 400.695652 0 1 0 801.391304 0 400.695652 400.695652 0 1 0-801.391304 0Z"
+						fill="#0B77E3" fill-opacity=".2" />
+					<path
+						d="M438.79513 597.092174l-88.498087-61.963131a67.005217 67.005217 0 0 0-76.855652 109.746087l142.625392 99.873392a67.005217 67.005217 0 0 0 93.785043-17.14087c3.33913-3.127652 6.38887-6.633739 9.115826-10.529391L755.311304 372.557913a67.005217 67.005217 0 1 0-109.757217-76.855652L438.79513 597.092174z"
+						fill="#FFFFFF" />
+					<path
+						d="M444.438261 628.224l-106.907826-74.863304a44.744348 44.744348 0 1 0-51.311305 73.282782l142.614261 99.873392a44.744348 44.744348 0 0 0 62.297044-10.98574l1.714087-2.504347 1.780869-1.669566c2.248348-2.114783 4.296348-4.452174 5.988174-6.867478L737.435826 359.401739a44.744348 44.744348 0 0 0-10.985739-62.308174c-20.23513-14.169043-48.128-9.238261-62.174609 10.818783L444.438261 628.224z m201.48313-332.911304a67.005217 67.005217 0 1 1 109.746087 76.855652L518.978783 717.078261c-2.726957 3.895652-5.787826 7.401739-9.115826 10.518261-21.704348 31.009391-63.47687 38.377739-93.785044 17.140869l-142.636522-99.84a67.005217 67.005217 0 0 1 76.855652-109.757217l70.277566 49.196522 18.231652 12.777739 12.477217-18.187131 194.637913-283.603478z"
+						fill="#005CB9" />
+				</svg>
+				<svg class="svg-icon"
+					style="position:absolute;top:1;right:1;width: 2em; height: 2em;vertical-align: middle;fill: currentColor;overflow: hidden;"
+					viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+					<path
+						d="M574.293333 512L810.666667 748.373333V810.666667h-62.293334L512 574.293333 275.626667 810.666667H213.333333v-62.293334L449.706667 512 213.333333 275.626667V213.333333h62.293334L512 449.706667 748.373333 213.333333H810.666667v62.293334L574.293333 512z"
+						fill="white" />
+				</svg>
+				<p style="color:white;position:absolute;top:50%;margin-left:10px;margin-top:40px">This water is suitable
+					for drinking.Now you can go ahead and drink that glass of water.</p>
 
+			</div>
+			<div class="wave-container">
+				<div style="height: 0;">
+
+				</div>
+				<svg style="border-radius:6px;" id="visual" viewBox="0 0 900 600" width="100%" height="100%"
+					xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+					<rect x="0" y="0" width="900" height="600" fill="#393456"></rect>
+					<g fill="#FFFFFF">
+						<circle r="147" cx="225" cy="174"></circle>
+					</g>
+				</svg>
+			</div>
+		</div>
+	</div>
+	<div class="fadeInSuitable" id="notSuitable">
+		<div class="fadeInContent">
+			<div class="fadeInContentDetail">
+				<svg class="svg-icon" style="position:absolute;top:8;right:58%;width: 7.4em; height: 7.4em;vertical-align: middle;fill: currentColor;overflow: hidden;"
+				viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+				<path fill="red"
+					d="M512 32c265.088 0 480 214.912 480 480 0 265.088-214.912 480-480 480-265.088 0-480-214.912-480-480C32 246.912 246.912 32 512 32z m0 434.72l-169.376-169.344a32 32 0 0 0-47.904 42.24l2.656 3.008L466.72 512l-169.344 169.376-2.656 3.008a32 32 0 0 0 0 39.232l2.656 3.008 3.008 2.656a32 32 0 0 0 39.232 0l3.008-2.656L512 557.28l169.376 169.344a32 32 0 0 0 47.904-42.24l-2.656-3.008L557.28 512l169.344-169.376 2.656-3.008a32 32 0 0 0 0-39.232l-2.656-3.008-3.008-2.656a32 32 0 0 0-39.232 0l-3.008 2.656L512 466.72l-169.376-169.344L512 466.72z"
+					fill="#404853" />
+			</svg>
+				
+				<svg class="svg-icon"
+					style="position:absolute;top:1;right:1;width: 2em; height: 2em;vertical-align: middle;fill: currentColor;overflow: hidden;"
+					viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+					<path
+						d="M574.293333 512L810.666667 748.373333V810.666667h-62.293334L512 574.293333 275.626667 810.666667H213.333333v-62.293334L449.706667 512 213.333333 275.626667V213.333333h62.293334L512 449.706667 748.373333 213.333333H810.666667v62.293334L574.293333 512z"
+						fill="white" />
+				</svg>
+				<p style="color:white;position:absolute;top:50%;margin-left:10px;margin-top:40px">Oops! Looks like the device did not like the quality of the water. Please discard the water solution.</p>
+
+			</div>
+			<div class="wave-container">
+				<div style="height: 0;">
+
+				</div>
+				<svg style="border-radius:6px;" id="visual" viewBox="0 0 900 600" width="100%" height="100%"
+					xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+					<rect x="0" y="0" width="900" height="600" fill="#393456"></rect>
+					<g fill="#FFFFFF">
+						<circle r="147" cx="225" cy="174"></circle>
+					</g>
+				</svg>
+			</div>
+		</div>
 	</div>
 	<script>
 		function openNav() {
@@ -268,8 +413,6 @@
 								var t = 0;
 								var tp = 0;
 
-								//document.getElementById("fs").innerHTML = result.fs;
-								//document.getElementById("drinkable").innerHTML = result.drinkable;
 								if (result.waterDetected == 0) {
 									//document.getElementById("detected").innerHTML = "Water detected! Commencing Testing.";
 								}
@@ -318,7 +461,6 @@
 								var dt = 1.0 / result.fs;
 								var t = 0;
 								var tp = 0;
-								//document.getElementById("drinkable").innerHTML = result.drinkable;
 
 								for (let i = 0; i < result.phValues.length; i++) {
 									var y = result.phValues[i];
@@ -355,24 +497,16 @@
 
 					// callback when the Web page has been loaded
 					$(document).ready(function () {
-						var data = [];
-						var g = new Dygraph(document.getElementById("div_p"), data,
-							{
-								labels: ['Time', 'Turbidity'],
-							});
+
 						window.intervalId = setInterval(function () {
 							// callback for interval timer for every second
 							$.getJSON(serverPath, function (result) {
 								data = [];
 								var dt = 1.0 / result.fs;
-								var t = 0;
 								var tp = 0;
-								//document.getElementById("drinkable").innerHTML = result.drinkable;
-								//document.getElementById("detectedTBLabel").innerHTML = "Evaluating Turbidity...";
 								for (let i = 0; i < result.turbidityValues.length; i++) {
 									var y = result.turbidityValues[i];
-									data.push([t, y]);
-									t = t + dt;
+									data.push(y);
 									tp = tp + 1;
 									document.getElementById("finalTB").innerHTML = y.toFixed(3);
 								}
@@ -381,7 +515,6 @@
 									value: tp,
 									textFormat: 'percent',
 								});
-								g.updateOptions({ 'file': data });
 							});
 						}, 1000);
 					});
@@ -393,42 +526,41 @@
 				<script type="text/javascript">
 					// max samples for dygraph
 					var maxSamples = 60;
-
+					var drinkable = false;
 					// relative path to the sensor data for get/post:
 					var serverPath = "/sensor/:80";
 
 					// callback when the Web page has been loaded
 					$(document).ready(function () {
-						var data = [];
-						var g = new Dygraph(document.getElementById("div_ph"), data,
-							{
-								labels: ['Time', 'Temperature'],
-							});
 
 						window.intervalId = setInterval(function () {
 							// callback for interval timer for every second
 							$.getJSON(serverPath, function (result) {
 								data = [];
-								var dt = 1.0 / result.fs;
-								var t = 0;
 								var tp = 0;
-								//document.getElementById("drinkable").innerHTML = result.drinkable;
-								//document.getElementById("detectedTPLabel").innerHTML = "Evaluating Temperature...";
 								for (let i = 0; i < result.temperatureValues.length; i++) {
 									var y = result.temperatureValues[i];
-									data.push([t, y]);
-									t = t + dt;
+									data.push(y);
 									tp = tp + 1;
 									document.getElementById("finalTP").innerHTML = y.toFixed(3);
+									if (tp == 36) {
+										$("#notSuitable").fadeIn("slow");
+									}
 								}
 								$('#progTP').circleProgress({
 									max: 29,
 									value: tp,
 									textFormat: 'percent',
 								});
-								g.updateOptions({ 'file': data });
+
+
+
 							});
 						}, 1000);
+
+						$(document).click(function () {
+
+						});
 					});
 				</script>
 
