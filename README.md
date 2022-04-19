@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="https://github.com/donank/smart-bottle/blob/main/logo.png" width="150" height="220"/>
+  <img src="https://github.com/donank/smart-bottle/blob/main/images/logo.png" width="150" height="220"/>
 </p>
 
 <div align="center">
@@ -17,9 +17,9 @@
 Follow us to keep up to date with the latest Developents of Ọ̀ṣun Smart Water Bottle
 
 <p align="center">
-<a href="https://www.instagram.com/oshun_smartbottle/" target="blank"><img align="center" src="https://github.com/donank/smart-bottle/blob/main/IG_logo.png"height="130" width="130" /></a>
-<a href="https://www.youtube.com/channel/UCZqFKWx1XRqQCA-4_mtC3Zg" target="blank"><img align="center" src="https://github.com/donank/smart-bottle/blob/main/Youtube_logo.png"height="150" width="150" /></a>
-<a href="https://www.tiktok.com/@o_smartbottle" target="blank"><img align="center" src="https://github.com/donank/smart-bottle/blob/main/Tiktok_logo.png"height="115" width="115" /></a>
+<a href="https://www.instagram.com/oshun_smartbottle/" target="blank"><img align="center" src="https://github.com/donank/smart-bottle/blob/main/images/IG_logo.png"height="130" width="130" /></a>
+<a href="https://www.youtube.com/channel/UCZqFKWx1XRqQCA-4_mtC3Zg" target="blank"><img align="center" src="https://github.com/donank/smart-bottle/blob/main/images/Youtube_logo.png"height="150" width="150" /></a>
+<a href="https://www.tiktok.com/@o_smartbottle" target="blank"><img align="center" src="https://github.com/donank/smart-bottle/blob/main/images/Tiktok_logo.png"height="115" width="115" /></a>
 
 
 
