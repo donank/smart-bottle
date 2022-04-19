@@ -13,13 +13,10 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
-
-      - name: Build
-        run: sh build.sh
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.0
