@@ -9,12 +9,13 @@ std::string turbidity::getType(){
 }
 
 void turbidity::calcThreshold(){
-    float latestValue = getData().front();
-    if(latestValue > 0.4){
+for(auto& v:getData()) {
+        if(v > 0.4){
         setType(turbidity::TYPE[2]);
-    }else if(latestValue < 0.3){
+    }else if(v < 0.3){
         setType(turbidity::TYPE[0]);
     }else{
         setType(turbidity::TYPE[1]);
     }
+}
 }

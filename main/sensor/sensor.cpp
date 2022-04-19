@@ -33,9 +33,10 @@ void sensor::threadRun(){
     while(flag){
         this->ADS1115rpi::start(s);
         std::time_t curr_time = system_clock::to_time_t (system_clock::now());
-        if(curr_time - start_time == 20){
+        if(curr_time - start_time == 5){
 				flag = 0;
                 this->stop();
+                //killThread();
         } 
 
     }
@@ -46,7 +47,11 @@ void sensor::startThread(){
     this->CppThreadInterface::start();
     this->join();
 }
-
+/*
+void sensor::killThread(){
+    delete this;
+}
+*/
 ADS1115settings::Input sensor::getChannel(){
     return channel_;
 }

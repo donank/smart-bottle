@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Oshun-Analysis</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" http-equiv="X-UA-Compatible" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/style.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.css" />
+
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+	<script src="jquery.circle-progress.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js"></script>
+
+	<style>
+		body {
+			position: relative;
+
+			font-family: "Lato", sans-serif;
+			background-color: #F8F8FF;
+		}
+
+		h1 {
+			font-family: 'Titillium Web', sans-serif;
+			font-size: 36px;
+			color: #082081
+		}
+
+		.sidebar {
+			height: 100%;
+			width: 0;
+			position: fixed;
+			z-index: 1;
+			top: 0;
+			left: 0;
+			background-color: #393456;
+			color: white;
+			overflow-x: hidden;
+			transition: 0.5s;
+			padding-top: 60px;
+		}
+
+		.sidebar a {
+			padding: 8px 8px 8px 32px;
+			text-decoration: none;
+			font-size: 25px;
+			color: white;
+			display: block;
+			transition: 0.3s;
+		}
+
+		.sidebar a:hover {
+			color: #f1f1f1;
+		}
+
+		.sidebar .closebtn {
+			position: absolute;
+			top: 0;
+			right: 25px;
+			font-size: 36px;
+			margin-left: 50px;
+		}
+
+		.openbtn {
+			width: 100%;
+			font-size: 20px;
+			cursor: pointer;
+			color: black;
+			padding: 14px 15px;
+			border: none;
+			text-align: left;
+		}
+
+		#main {
+			transition: margin-left .5s;
+			padding: 16px;
+		}
+
+		@media screen and (max-height: 450px) {
+			.sidebar {
+				padding-top: 15px;
+			}
+
+			.sidebar a {
+				font-size: 18px;
+			}
+		}
+
+		.progressContainer {
+			margin-top: 10px;
+			display: grid;
+			grid-template-rows: auto auto auto auto;
+			grid-row-gap: 10px;
+			align-content: start;
+
+		}
+
+		.progContainer {
+			height: 160px;
+			color: white;
+			background-color: #393456;
+			border-radius: 6px;
+			display: grid;
+			grid-template-columns: 160px auto;
+			align-content: center;
+		}
+
+		.progValContainer {
+			position: relative;
+			padding: 0;
+		}
+
+		.progVal {
+			position: absolute;
+			top: 50%;
+			left: 30%;
+			transform: translate(-50%, -50%);
+			display: flex;
+			flex-direction: row;
+			gap: 10px;
+		}
+
+		.progVal1 {
+			position: absolute;
+			top: 50%;
+			left: 35%;
+			transform: translate(-50%, -50%);
+		}
+
+		.progress {
+			margin-left: 10px;
+		}
+
+		.circle-progress {
+			width: 120px;
+			height: auto;
+		}
+
+		.circle-progress-value {
+			stroke-width: 10px;
+			stroke: white;
+		}
+
+		.circle-progress-circle {
+			stroke-width: 10px;
+			stroke: grey;
+		}
+
+		.circle-progress-text {
+			fill: white;
+		}
+
+		.fadeInSuitable {
+			width: 350px;
+			background-color: white;
+			color: black;
+			display: none;
+			position: absolute;
+			top: 40%;
+			left: 2.5%;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+			border-radius: 6px;
+
+		}
+
+		.fadeInContent {
+			display: grid;
+			background-color: white;
+			width: 100%;
+			height: 100%;
+			border-radius: 6px;
+
+		}
+
+		.fadeInContentDetail {
+			grid-area: 1 / 1;
+			width: 100%;
+			height: 100%;
+			z-index: 10;
+			border-radius: 6px;
+			position: relative;
+		}
+
+		.wave-container {
+			grid-area: 1 / 1;
+			width: 100%;
+			height: 100%;
+			display: grid;
+			grid-template-rows: auto auto;
+			border-radius: 6px;
+		}
+
+
+		.fadeInNotSuitable {
+			width: 350px;
+			background-color: white;
+			color: black;
+			display: none;
+			position: absolute;
+			top: 40%;
+			left: 2.5%;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+		}
+
+		.buttonReport {
+			background-color: white;
+			color: black;
+			border: 2px solid #f44336;
+		}
+
+		.buttonReport:hover {
+			background-color: #f44336;
+			color: white;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="mySidebar" class="sidebar">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">x</a>
+		<a href="https://github.com/donank/smart-bottle">About</a>
+		<a href="http://192.168.1.21/oshun.html">Debug</a>
+		<a href="#">Contact</a>
+	</div>
+
+	<div id="main">
+		<button class="openbtn" onclick="openNav()">&#9776; Analysis</button>
+		<div class="progressContainer">
+			<div class="progContainer">
+				<div class="progress" id="progV">
+				</div>
+				<div class="progValContainer">
+
+					<svg id="volumeCheck" style="position:absolute;top:-5;right:10;display:none;"
+						xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="32" height="32">
+						<path fill="#32BEA6"
+							d="M504.1,256C504.1,119,393,7.9,256,7.9C119,7.9,7.9,119,7.9,256C7.9,393,119,504.1,256,504.1C393,504.1,504.1,393,504.1,256z" />
+						<path fill="#FFF"
+							d="M392.6,172.9c-5.8-15.1-17.7-12.7-30.6-10.1c-7.7,1.6-42,11.6-96.1,68.8c-22.5,23.7-37.3,42.6-47.1,57c-6-7.3-12.8-15.2-20-22.3C176.7,244.2,152,229,151,228.4c-10.3-6.3-23.8-3.1-30.2,7.3c-6.3,10.3-3.1,23.8,7.2,30.2c0.2,0.1,21.4,13.2,39.6,31.5c18.6,18.6,35.5,43.8,35.7,44.1c4.1,6.2,11,9.8,18.3,9.8c1.2,0,2.5-0.1,3.8-0.3c8.6-1.5,15.4-7.9,17.5-16.3c0.1-0.2,8.8-24.3,54.7-72.7c37-39.1,61.7-51.5,70.3-54.9c0.1,0,0.1,0,0.3,0c0,0,0.3-0.1,0.8-0.4c1.5-0.6,2.3-0.8,2.3-0.8c-0.4,0.1-0.6,0.1-0.6,0.1l0-0.1c4-1.7,11.4-4.9,11.5-5C393.3,196.1,397,184.1,392.6,172.9z" />
+					</svg>
+					<div class="progVal1">
+						<h3><span id="detectedVLabel">Detecting Water Solution</span></h3>
+					</div>
+				</div>
+			</div>
+			<div class="progContainer">
+				<div class="progress" id="progPH">
+				</div>
+				<div class="progValContainer">
+					<svg id="tphCheck" style="position:absolute;top:-5;right:10;display:none;"
+						xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="32" height="32">
+						<path fill="#32BEA6"
+							d="M504.1,256C504.1,119,393,7.9,256,7.9C119,7.9,7.9,119,7.9,256C7.9,393,119,504.1,256,504.1C393,504.1,504.1,393,504.1,256z" />
+						<path fill="#FFF"
+							d="M392.6,172.9c-5.8-15.1-17.7-12.7-30.6-10.1c-7.7,1.6-42,11.6-96.1,68.8c-22.5,23.7-37.3,42.6-47.1,57c-6-7.3-12.8-15.2-20-22.3C176.7,244.2,152,229,151,228.4c-10.3-6.3-23.8-3.1-30.2,7.3c-6.3,10.3-3.1,23.8,7.2,30.2c0.2,0.1,21.4,13.2,39.6,31.5c18.6,18.6,35.5,43.8,35.7,44.1c4.1,6.2,11,9.8,18.3,9.8c1.2,0,2.5-0.1,3.8-0.3c8.6-1.5,15.4-7.9,17.5-16.3c0.1-0.2,8.8-24.3,54.7-72.7c37-39.1,61.7-51.5,70.3-54.9c0.1,0,0.1,0,0.3,0c0,0,0.3-0.1,0.8-0.4c1.5-0.6,2.3-0.8,2.3-0.8c-0.4,0.1-0.6,0.1-0.6,0.1l0-0.1c4-1.7,11.4-4.9,11.5-5C393.3,196.1,397,184.1,392.6,172.9z" />
+					</svg>
+
+					<div class="progVal">
+						<h3><span id="finalPH">0.00</span></h3>
+						<h3><span id="detectedPHLabel">pH</span></h3>
+					</div>
+				</div>
+			</div>
+			<div class="progContainer">
+				<div class="progress" id="progTB">
+				</div>
+				<div class="progValContainer">
+					<svg id="tbCheckPass" style="position:absolute;top:-5;right:10;display:none;"
+						xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="32" height="32">
+						<path fill="#32BEA6"
+							d="M504.1,256C504.1,119,393,7.9,256,7.9C119,7.9,7.9,119,7.9,256C7.9,393,119,504.1,256,504.1C393,504.1,504.1,393,504.1,256z" />
+						<path fill="#FFF"
+							d="M392.6,172.9c-5.8-15.1-17.7-12.7-30.6-10.1c-7.7,1.6-42,11.6-96.1,68.8c-22.5,23.7-37.3,42.6-47.1,57c-6-7.3-12.8-15.2-20-22.3C176.7,244.2,152,229,151,228.4c-10.3-6.3-23.8-3.1-30.2,7.3c-6.3,10.3-3.1,23.8,7.2,30.2c0.2,0.1,21.4,13.2,39.6,31.5c18.6,18.6,35.5,43.8,35.7,44.1c4.1,6.2,11,9.8,18.3,9.8c1.2,0,2.5-0.1,3.8-0.3c8.6-1.5,15.4-7.9,17.5-16.3c0.1-0.2,8.8-24.3,54.7-72.7c37-39.1,61.7-51.5,70.3-54.9c0.1,0,0.1,0,0.3,0c0,0,0.3-0.1,0.8-0.4c1.5-0.6,2.3-0.8,2.3-0.8c-0.4,0.1-0.6,0.1-0.6,0.1l0-0.1c4-1.7,11.4-4.9,11.5-5C393.3,196.1,397,184.1,392.6,172.9z" />
+					</svg>
+					<svg class="svg-icon" id="tbCheckFail"
+					style="position:absolute;top:-5;right:10;display:none;" width="32" height="32"
+					viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+					<path fill="red"
+						d="M512 32c265.088 0 480 214.912 480 480 0 265.088-214.912 480-480 480-265.088 0-480-214.912-480-480C32 246.912 246.912 32 512 32z m0 434.72l-169.376-169.344a32 32 0 0 0-47.904 42.24l2.656 3.008L466.72 512l-169.344 169.376-2.656 3.008a32 32 0 0 0 0 39.232l2.656 3.008 3.008 2.656a32 32 0 0 0 39.232 0l3.008-2.656L512 557.28l169.376 169.344a32 32 0 0 0 47.904-42.24l-2.656-3.008L557.28 512l169.344-169.376 2.656-3.008a32 32 0 0 0 0-39.232l-2.656-3.008-3.008-2.656a32 32 0 0 0-39.232 0l-3.008 2.656L512 466.72l-169.376-169.344L512 466.72z"
+						fill="#404853" />
+				</svg>
+
+					<div class="progVal">
+						<h3><span id="finalTB">0.00</span></h3>
+						<h3><span id="detectedTBLabel">NTU</span></h3>
+					</div>
+				</div>
+			</div>
+			<div class="progContainer">
+				<div class="progress" id="progTP">
+				</div>
+				<div class="progValContainer">
+					<svg id="tpCheck" style="position:absolute;top:-5;right:10;display:none;"
+						xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="32" height="32">
+						<path fill="#32BEA6"
+							d="M504.1,256C504.1,119,393,7.9,256,7.9C119,7.9,7.9,119,7.9,256C7.9,393,119,504.1,256,504.1C393,504.1,504.1,393,504.1,256z" />
+						<path fill="#FFF"
+							d="M392.6,172.9c-5.8-15.1-17.7-12.7-30.6-10.1c-7.7,1.6-42,11.6-96.1,68.8c-22.5,23.7-37.3,42.6-47.1,57c-6-7.3-12.8-15.2-20-22.3C176.7,244.2,152,229,151,228.4c-10.3-6.3-23.8-3.1-30.2,7.3c-6.3,10.3-3.1,23.8,7.2,30.2c0.2,0.1,21.4,13.2,39.6,31.5c18.6,18.6,35.5,43.8,35.7,44.1c4.1,6.2,11,9.8,18.3,9.8c1.2,0,2.5-0.1,3.8-0.3c8.6-1.5,15.4-7.9,17.5-16.3c0.1-0.2,8.8-24.3,54.7-72.7c37-39.1,61.7-51.5,70.3-54.9c0.1,0,0.1,0,0.3,0c0,0,0.3-0.1,0.8-0.4c1.5-0.6,2.3-0.8,2.3-0.8c-0.4,0.1-0.6,0.1-0.6,0.1l0-0.1c4-1.7,11.4-4.9,11.5-5C393.3,196.1,397,184.1,392.6,172.9z" />
+					</svg>
+
+					<div class="progVal">
+						<h3><span id="finalTP">0.00</span></h3>
+						<h3><span id="detectedTPLabel">&#8451;</span></h3>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="fadeInSuitable" id="suitable">
+		<div class="fadeInContent">
+			<div class="fadeInContentDetail">
+				<svg class="svg-icon"
+					style="position:absolute;top:-0.5;right:55.5%;width: 8.5em; height: 8.5em;vertical-align: middle;fill: currentColor;overflow: hidden;"
+					viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+					<path
+						d="M512 512m-400.695652 0a400.695652 400.695652 0 1 0 801.391304 0 400.695652 400.695652 0 1 0-801.391304 0Z"
+						fill="#0B77E3" fill-opacity=".2" />
+					<path
+						d="M438.79513 597.092174l-88.498087-61.963131a67.005217 67.005217 0 0 0-76.855652 109.746087l142.625392 99.873392a67.005217 67.005217 0 0 0 93.785043-17.14087c3.33913-3.127652 6.38887-6.633739 9.115826-10.529391L755.311304 372.557913a67.005217 67.005217 0 1 0-109.757217-76.855652L438.79513 597.092174z"
+						fill="#FFFFFF" />
+					<path
+						d="M444.438261 628.224l-106.907826-74.863304a44.744348 44.744348 0 1 0-51.311305 73.282782l142.614261 99.873392a44.744348 44.744348 0 0 0 62.297044-10.98574l1.714087-2.504347 1.780869-1.669566c2.248348-2.114783 4.296348-4.452174 5.988174-6.867478L737.435826 359.401739a44.744348 44.744348 0 0 0-10.985739-62.308174c-20.23513-14.169043-48.128-9.238261-62.174609 10.818783L444.438261 628.224z m201.48313-332.911304a67.005217 67.005217 0 1 1 109.746087 76.855652L518.978783 717.078261c-2.726957 3.895652-5.787826 7.401739-9.115826 10.518261-21.704348 31.009391-63.47687 38.377739-93.785044 17.140869l-142.636522-99.84a67.005217 67.005217 0 0 1 76.855652-109.757217l70.277566 49.196522 18.231652 12.777739 12.477217-18.187131 194.637913-283.603478z"
+						fill="#005CB9" />
+				</svg>
+				<svg class="svg-icon"
+					style="position:absolute;top:1;right:1;width: 2em; height: 2em;vertical-align: middle;fill: currentColor;overflow: hidden;"
+					viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+					<path
+						d="M574.293333 512L810.666667 748.373333V810.666667h-62.293334L512 574.293333 275.626667 810.666667H213.333333v-62.293334L449.706667 512 213.333333 275.626667V213.333333h62.293334L512 449.706667 748.373333 213.333333H810.666667v62.293334L574.293333 512z"
+						fill="white" />
+				</svg>
+				<p style="color:white;position:absolute;top:50%;margin-left:10px;margin-top:40px">This water is suitable
+					for drinking.Now you can go ahead and drink that glass of water.</p>
+
+			</div>
+			<div class="wave-container">
+				<div style="height: 0;">
+
+				</div>
+				<svg style="border-radius:6px;" id="visual" viewBox="0 0 900 600" width="100%" height="100%"
+					xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+					<rect x="0" y="0" width="900" height="600" fill="#393456"></rect>
+					<g fill="#FFFFFF">
+						<circle r="147" cx="225" cy="174"></circle>
+					</g>
+				</svg>
+			</div>
+		</div>
+	</div>
+	<div class="fadeInSuitable" id="notSuitable">
+		<div class="fadeInContent">
+			<div class="fadeInContentDetail">
+				<svg class="svg-icon"
+					style="position:absolute;top:8;right:58%;width: 7.4em; height: 7.4em;vertical-align: middle;fill: currentColor;overflow: hidden;"
+					viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+					<path fill="red"
+						d="M512 32c265.088 0 480 214.912 480 480 0 265.088-214.912 480-480 480-265.088 0-480-214.912-480-480C32 246.912 246.912 32 512 32z m0 434.72l-169.376-169.344a32 32 0 0 0-47.904 42.24l2.656 3.008L466.72 512l-169.344 169.376-2.656 3.008a32 32 0 0 0 0 39.232l2.656 3.008 3.008 2.656a32 32 0 0 0 39.232 0l3.008-2.656L512 557.28l169.376 169.344a32 32 0 0 0 47.904-42.24l-2.656-3.008L557.28 512l169.344-169.376 2.656-3.008a32 32 0 0 0 0-39.232l-2.656-3.008-3.008-2.656a32 32 0 0 0-39.232 0l-3.008 2.656L512 466.72l-169.376-169.344L512 466.72z"
+						fill="#404853" />
+				</svg>
+
+				<svg class="svg-icon"
+					style="position:absolute;top:1;right:1;width: 2em; height: 2em;vertical-align: middle;fill: currentColor;overflow: hidden;"
+					viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+					<path
+						d="M574.293333 512L810.666667 748.373333V810.666667h-62.293334L512 574.293333 275.626667 810.666667H213.333333v-62.293334L449.706667 512 213.333333 275.626667V213.333333h62.293334L512 449.706667 748.373333 213.333333H810.666667v62.293334L574.293333 512z"
+						fill="white" />
+				</svg>
+				<p style="color:white;position:absolute;top:50%;margin-left:10px;margin-top:40px">Oops! Looks like the
+					device did not like the quality of the water. Please discard the water solution.</p>
+
+			</div>
+			<div class="wave-container">
+				<div style="height: 0;">
+
+				</div>
+				<svg style="border-radius:6px;" id="visual" viewBox="0 0 900 600" width="100%" height="100%"
+					xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+					<rect x="0" y="0" width="900" height="600" fill="#393456"></rect>
+					<g fill="#FFFFFF">
+						<circle r="147" cx="225" cy="174"></circle>
+					</g>
+				</svg>
+			</div>
+		</div>
+	</div>
+	<script>
+		function openNav() {
+			document.getElementById("mySidebar").style.width = "250px";
+			document.getElementById("main").style.marginLeft = "250px";
+		}
+
+		function closeNav() {
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft = "0";
+		}
+	</script>
+	<script type="text/javascript">
+		$('.progress').circleProgress({
+			max: 29,
+			value: 0,
+			textFormat: 'percent',
+		});
+		var tv = 0;
+		var serverPath = "/sensor/:80";
+		$(document).ready(function () {
+			window.intervalId = setInterval(function () {
+				$.getJSON(serverPath, function (result) {
+					var tv = 0;
+					var tp = 0;
+					var tb = 0;
+					var tm = 0;
+					for (let i = 0; i < result.volumeValues.length; i++) {
+						var y = result.volumeValues[i];
+						tv = tv + 1;
+						if (tv == 30) {
+							$('#volumeCheck').fadeIn();
+						}
+					}
+					$('#progV').circleProgress({
+						max: 30,
+						value: tv,
+						textFormat: 'percent',
+					});
+					for (let i = 0; i < result.phValues.length; i++) {
+						var y = result.phValues[i];
+						tp = tp + 1;
+						document.getElementById("finalPH").innerHTML = (y + 5.0).toFixed(3);
+						if (tp == 30) {
+							$('#tphCheck').fadeIn();
+						}
+					}
+					$('#progPH').circleProgress({
+						max: 30,
+						value: tp,
+						textFormat: 'percent',
+					});
+
+					for (let i = 0; i < result.turbidityValues.length; i++) {
+						var y = result.turbidityValues[i];
+						tb = tb + 1;
+						document.getElementById("finalTB").innerHTML = (y+20).toFixed(3);
+						if (tb == 30) {
+							if(y+20 <= 0.5){
+								$('#tbCheckPass').fadeIn();
+							}else{
+								$('#tbCheckFail').fadeIn();
+							}
+						}
+					}
+					$('#progTB').circleProgress({
+						max: 30,
+						value: tb,
+						textFormat: 'percent',
+					});
+
+					for (let i = 0; i < result.temperatureValues.length; i++) {
+						var y = result.temperatureValues[i];
+						tm = tm + 1;
+						document.getElementById("finalTP").innerHTML = (y + 6.0).toFixed(3);
+						if (tm == 28) {
+							$('#tpCheck').fadeIn();
+						}
+						if (tm == 35) {
+							if (result.drinkable == true) {
+								$("#suitable").fadeIn("slow");
+							} else {
+								$("#notSuitable").fadeIn("slow");
+							}
+						}
+					}
+					$('#progTP').circleProgress({
+						max: 29,
+						value: tm,
+						textFormat: 'percent',
+					});
+
+				});
+			}, 1000);
+		});
+	</script>
+	<script type="text/javascript">
+		var serverPath = "/sensor/:80";
+		$(document).ready(function () {
+
+			window.intervalId = setInterval(function () {
+				$.getJSON(serverPath, function (result) {
+
+				});
+			}, 1000);
+		});
+	</script>
+	<script type="text/javascript">
+		var serverPath = "/sensor/:80";
+		$(document).ready(function () {
+			var tb = 0;
+			window.intervalId = setInterval(function () {
+				// callback for interval timer for every second
+				$.getJSON(serverPath, function (result) {
+
+				});
+			}, 1000);
+		});
+	</script>
+	<script type="text/javascript">
+		var serverPath = "/sensor/:80";
+		$(document).ready(function () {
+			var tm = 0;
+			window.intervalId = setInterval(function () {
+				$.getJSON(serverPath, function (result) {
+
+
+
+				});
+			}, 1000);
+		});
+	</script>
+</body>
+
+</html>

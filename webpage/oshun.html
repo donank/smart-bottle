@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>Welcome to the Realtime Embedded Test server</title>
+	<title>Oshun</title>
 	<style>
 		body {
 			width: 35em;
@@ -32,8 +32,23 @@
 			background: Black;
 			box-sizing: border-box;
 		}
+
+		.circle-progress-value {
+			stroke-width: 6px;
+			stroke: hsl(39, 100%, 50%);
+		}
+
+		.circle-progress-circle {
+			stroke-width: 6px;
+			stroke: hsl(39, 100%, 85%);
+		}
+
+		.circle-progress-text {
+			fill: hsl(39, 100%, 50%);
+		}
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="jquery.circle-progress.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js"></script>
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.css" />
 </head>
@@ -43,6 +58,8 @@
 	<h2>Oshun smart water bottle's, water quality results</h2>
 	<h3>fs = <span id="fs">00</span> Hz</h3>
 	<h3>Drinkable = <span id="drinkable">NA</span></h3>
+	<div class="progress"></div>
+
 	<table>
 		<tr>
 			<th>
@@ -90,6 +107,12 @@
 									var y = result.volumeValues[i];
 									data.push([t, y]);
 									t = t + dt;
+
+									$('.progress').circleProgress({
+										max: 20,
+										value: t,
+										textFormat: 'percent',
+									});
 								}
 								g.updateOptions({ 'file': data });
 							});

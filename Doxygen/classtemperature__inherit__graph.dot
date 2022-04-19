@@ -1,0 +1,17 @@
+digraph "temperature"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="temperature",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Temperature sensor class."];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="sensor",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classsensor.html",tooltip="Parent sensor class."];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="ADS1115rpi",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_a_d_s1115rpi.html",tooltip="This class reads data from the ADS1115 in the background (separate thread) and calls a callback funct..."];
+  Node4 -> Node2 [dir="back",color="firebrick4",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="CppThreadInterface",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",URL="$class_cpp_thread_interface.html",tooltip=" "];
+  Node5 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="CppThread",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_cpp_thread.html",tooltip="GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007."];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="ADS1115PrinterTP",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",URL="$class_a_d_s1115_printer_t_p.html",tooltip=" "];
+}

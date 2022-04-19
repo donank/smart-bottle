@@ -39,6 +39,7 @@ public:
     size_t getSize();
     void reset();
     void startThread();
+    void killThread();
     virtual void calcThreshold() = 0;
 
 private:
