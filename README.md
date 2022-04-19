@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="https://github.com/donank/smart-bottle/blob/main/logo.png" width="150" height="220"/>
+  <img src="https://github.com/donank/smart-bottle/blob/main/images/logo.png" width="150" height="220"/>
 </p>
 
 <div align="center">
@@ -12,8 +12,21 @@
   
 </div>
 
+
+# Social Media
+Follow us to keep up to date with the latest Developents of Ọ̀ṣun Smart Water Bottle
+
+<p align="center">
+<a href="https://www.instagram.com/oshun_smartbottle/" target="blank"><img align="center" src="https://github.com/donank/smart-bottle/blob/main/images/IG_logo.png"height="130" width="130" /></a>
+<a href="https://www.youtube.com/channel/UCZqFKWx1XRqQCA-4_mtC3Zg" target="blank"><img align="center" src="https://github.com/donank/smart-bottle/blob/main/images/Youtube_logo.png"height="150" width="150" /></a>
+<a href="https://www.tiktok.com/@o_smartbottle" target="blank"><img align="center" src="https://github.com/donank/smart-bottle/blob/main/images/Tiktok_logo.png"height="115" width="115" /></a>
+
+
+
 Winner of RS Grassroots Student Project Fund! https://www.rs-online.com/designspark/the-student-project-fund-2022-winners-announced
 # Ọ̀ṣun: A Smart Water Bottle
+
+
 
 It is a known fact that availability of drinkable water is critical to human survival and longevity of life. Earth is abundant in water resources but the availability of drinking water resources is marginal in comparison. The situation seems more grim in the poorer regions of the world, where due to lack of proper infrastructure, standard testing code and compliance, the quality of drinking water that is available to the average citizen is poor. People living in such regions also do not have any proper tools or capability to verify the quality of the drinking water. They have to rely on the local municipal body for such information which can be dated or unreliable.  According to WHO, today, more than 144 million people depend on surface drinking water and around 485,000 people die every year due to illnesses related to contaminated water such as Diarrhoea. In addition, waterborne infections affect around 20-50% of the travellers around the world. Thus aligning with the UN sustainable development goals, there is an urgent need for an affordable smart portable device that caters to the real time testing needs for environments with inadequate drinking water and sanitation facilities. 
 
@@ -41,6 +54,8 @@ Note: Sensor units are composed of pre-filters and amplifiers to attenuate noise
 [1] World Health Organization Guidelines for drinking-water quality, fourth edition, 2011
 
 [2] Y.J. Yang, R.C Haught and J.A Goodrich, Real-time contaminant detection and classification in a drinking water pipe using conventional water quality sensors: Techniques and experimental results, in Journal of Environmental Management, 2009
+
+[3] jQuery <--> C++ FastCGI Web API https://github.com/berndporr/json_fastcgi_web_api
 
 ## Sensors to explore
 
