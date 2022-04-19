@@ -20,4 +20,12 @@ jobs:
 
       - name: Build
         run: sh build.sh
-  
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: DenverCoder1/doxygen-github-pages-action@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          folder: Docs/html
