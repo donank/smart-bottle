@@ -12,20 +12,17 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: self-hosted
-
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
 
       - name: Build
         run: sh build.sh
 
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: DenverCoder1/doxygen-github-pages-action@v1
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.3.0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: gh-pages
-          folder: Docs/html
+          branch: main 
+          folder: Docs/html 
