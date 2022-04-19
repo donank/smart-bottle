@@ -234,13 +234,13 @@ int main(int argc, char *argv[]) {
 	sensorcommph.startThread();
 	sensorcommtb.startThread();
 	sensorcommtp.startThread();
-
+	
 	fprintf(stderr,"'%s' finished running. You can exit\n",argv[0]);
 	while (mainRunning) sleep(1);
 		
 	// stops the fast CGI handlder
 	delete fastCGIHandler;
-
+	//exit(1);
 	
 	return 0;
 }
