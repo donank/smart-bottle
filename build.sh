@@ -1,6 +1,2 @@
-if [ ! -d "$build" ]; then
-  mkdir build
-fi
-cd build
-cmake ../main
-cmake --build .
+cmake -S . -B build
+cmake --build build

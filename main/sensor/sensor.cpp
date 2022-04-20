@@ -3,12 +3,11 @@
 #include <thread>
 
 void sensor::setData(float data){
-    //cb_.put(data);
     values.push_back(data);
 }
 
 std::deque<float> sensor::getData(){
-    return values; //returns last inserted value from buffer
+    return values; 
 }
 
 size_t sensor::getSize(){
