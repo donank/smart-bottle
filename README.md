@@ -21,14 +21,13 @@ Follow us to keep up to date with the latest Developents of Ọ̀ṣun Smart Wat
 <a href="https://www.youtube.com/channel/UCZqFKWx1XRqQCA-4_mtC3Zg" target="blank"><img align="center" src="https://github.com/donank/smart-bottle/blob/main/images/Youtube_logo.png"height="150" width="150" /></a>
 <a href="https://www.tiktok.com/@o_smartbottle" target="blank"><img align="center" src="https://github.com/donank/smart-bottle/blob/main/images/Tiktok_logo.png"height="115" width="115" /></a>
 
-# Wiki
-Make sure to read in-depth teachnical details about this project in the ![Wiki](https://github.com/donank/smart-bottle/wiki)
 
 
 Winner of RS Grassroots Student Project Fund! https://www.rs-online.com/designspark/the-student-project-fund-2022-winners-announced
 # Ọ̀ṣun: A Smart Water Bottle
 
-
+# Wiki
+Make sure to read in-depth teachnical details about this project in the ![Wiki](https://github.com/donank/smart-bottle/wiki)
 
 It is a known fact that availability of drinkable water is critical to human survival and longevity of life. Earth is abundant in water resources but the availability of drinking water resources is marginal in comparison. The situation seems more grim in the poorer regions of the world, where due to lack of proper infrastructure, standard testing code and compliance, the quality of drinking water that is available to the average citizen is poor. People living in such regions also do not have any proper tools or capability to verify the quality of the drinking water. They have to rely on the local municipal body for such information which can be dated or unreliable.  According to WHO, today, more than 144 million people depend on surface drinking water and around 485,000 people die every year due to illnesses related to contaminated water such as Diarrhoea. In addition, waterborne infections affect around 20-50% of the travellers around the world. Thus aligning with the UN sustainable development goals, there is an urgent need for an affordable smart portable device that caters to the real time testing needs for environments with inadequate drinking water and sanitation facilities. 
 
