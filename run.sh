@@ -4,3 +4,4 @@ fi
 cd build
 cmake ../main
 cmake --build .
+sudo ./main
