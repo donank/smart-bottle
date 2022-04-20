@@ -430,7 +430,7 @@
 					for (let i = 0; i < result.phValues.length; i++) {
 						var y = result.phValues[i];
 						tp = tp + 1;
-						document.getElementById("finalPH").innerHTML = (y + 5.0).toFixed(3);
+						document.getElementById("finalPH").innerHTML = (y).toFixed(3);
 						if (tp == 30) {
 							$('#tphCheck').fadeIn();
 						}
@@ -444,7 +444,7 @@
 					for (let i = 0; i < result.turbidityValues.length; i++) {
 						var y = result.turbidityValues[i];
 						tb = tb + 1;
-						document.getElementById("finalTB").innerHTML = (y+20).toFixed(3);
+						document.getElementById("finalTB").innerHTML = (y).toFixed(3);
 						if (tb == 30) {
 							if(y+20 <= 0.5){
 								$('#tbCheckPass').fadeIn();
@@ -462,7 +462,7 @@
 					for (let i = 0; i < result.temperatureValues.length; i++) {
 						var y = result.temperatureValues[i];
 						tm = tm + 1;
-						document.getElementById("finalTP").innerHTML = (y + 6.0).toFixed(3);
+						document.getElementById("finalTP").innerHTML = (y).toFixed(3);
 						if (tm == 28) {
 							$('#tpCheck').fadeIn();
 						}
