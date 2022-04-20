@@ -26,10 +26,6 @@ Follow us to keep up to date with the latest Developents of Ọ̀ṣun Smart Wat
 Winner of RS Grassroots Student Project Fund! https://www.rs-online.com/designspark/the-student-project-fund-2022-winners-announced
 # Ọ̀ṣun: A Smart Water Bottle
 
-# Wiki
-Make sure to read in-depth teachnical details about this project in the ![Wiki](https://github.com/donank/smart-bottle/wiki)
- 
-# About
 
 It is a known fact that availability of drinkable water is critical to human survival and longevity of life. Earth is abundant in water resources but the availability of drinking water resources is marginal in comparison. The situation seems more grim in the poorer regions of the world, where due to lack of proper infrastructure, standard testing code and compliance, the quality of drinking water that is available to the average citizen is poor. People living in such regions also do not have any proper tools or capability to verify the quality of the drinking water. They have to rely on the local municipal body for such information which can be dated or unreliable.  According to WHO, today, more than 144 million people depend on surface drinking water and around 485,000 people die every year due to illnesses related to contaminated water such as Diarrhoea. In addition, waterborne infections affect around 20-50% of the travellers around the world. Thus aligning with the UN sustainable development goals, there is an urgent need for an affordable smart portable device that caters to the real time testing needs for environments with inadequate drinking water and sanitation facilities. 
 
@@ -52,6 +48,9 @@ Note: Sensor units are composed of pre-filters and amplifiers to attenuate noise
 | Conductivity  | µs/cm  | 500-1000  |
 | Turbidity  | NTU | 0-5  |
 | pH  | PH  | 6.5-8.5 |
+
+# Wiki
+Make sure to read in-depth teachnical details about this project in the [Wiki](https://github.com/donank/smart-bottle/wiki)
 
 ## References
 [1] World Health Organization Guidelines for drinking-water quality, fourth edition, 2011
