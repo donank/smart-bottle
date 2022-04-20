@@ -21,6 +21,8 @@ Follow us to keep up to date with the latest Developents of Ọ̀ṣun Smart Wat
 <a href="https://www.youtube.com/channel/UCZqFKWx1XRqQCA-4_mtC3Zg" target="blank"><img align="center" src="https://github.com/donank/smart-bottle/blob/main/images/Youtube_logo.png"height="150" width="150" /></a>
 <a href="https://www.tiktok.com/@o_smartbottle" target="blank"><img align="center" src="https://github.com/donank/smart-bottle/blob/main/images/Tiktok_logo.png"height="115" width="115" /></a>
 
+# Wiki
+Make sure to read in-depth teachnical details about this project in the ![Wiki](https://github.com/donank/smart-bottle/wiki)
 
 
 Winner of RS Grassroots Student Project Fund! https://www.rs-online.com/designspark/the-student-project-fund-2022-winners-announced
