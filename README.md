@@ -50,7 +50,7 @@ Note: Sensor units are composed of pre-filters and amplifiers to attenuate noise
 | pH  | PH  | 6.5-8.5 |
 
 # Wiki
-Make sure to read in-depth teachnical details about this project in the [Wiki](https://github.com/donank/smart-bottle/wiki)
+To read installation instructions and in-depth teachnical details about this project, visit the [Wiki](https://github.com/donank/smart-bottle/wiki)
 
 ## References
 [1] World Health Organization Guidelines for drinking-water quality, fourth edition, 2011
